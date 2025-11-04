@@ -1,0 +1,96 @@
+package com.manincorp.trading.controller;
+
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.manincorp.trading.common.Result;
+import com.manincorp.trading.entity.Article;
+import com.manincorp.trading.service.ArticleService;
+import jakarta.annotation.Resource;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+/**
+ * author: Jamie
+ * Package: com.manincorp.trading.controller.ArticleController
+ * Date: 2025-11-04 10:36
+ * Description:
+ */
+@RestController
+@RequestMapping("/article")
+public class ArticleController {
+
+    @Resource
+    private ArticleService articleService;
+
+    /**
+     * add
+     */
+    @PostMapping("/add")
+    public Result add(@RequestBody Article article) {
+        articleService.save(article);
+        return Result.success(article);
+    }
+
+    /**
+     * delete
+     */
+    @DeleteMapping("/delete/{id}")
+    public Result deleteById(@PathVariable Integer id) {
+        articleService.removeById(id);
+        return Result.success();
+    }
+
+    /**
+     * Batch delete
+     */
+    @DeleteMapping("/delete/batch")
+    public Result deleteBatch(@RequestBody List<Integer> ids) {
+        articleService.removeBatchByIds(ids);
+        return Result.success();
+    }
+
+    /**
+     * update
+     */
+    @PostMapping("/update")
+    public Result updateById(@RequestBody Article article) {
+        articleService.updateById(article);
+        return Result.success(article);
+    }
+
+    /**
+     * Query by ID
+     */
+    @GetMapping("/selectById/{id}")
+    public Result selectById(@PathVariable Integer id) {
+        Article article = articleService.getById(id);
+        return Result.success(article);
+    }
+
+
+    /**
+     * Query all
+     */
+    @GetMapping("/selectAll")
+    public Result selectAll() {
+        List<Article> articlelist = articleService.list();
+        return Result.success(articlelist);
+    }
+
+    /**
+     * page
+     */
+    @GetMapping("/selectPage")
+    public Result selectPage(@RequestParam Integer pageNum,
+                             @RequestParam Integer pageSize,
+                             @RequestParam(required = false) String name) {
+        QueryWrapper<Article> wrapper = new QueryWrapper<>();
+        if(name != null) {
+            wrapper.like("name", name);
+        }
+        Page<Article> page = articleService.page(new Page<>(pageNum, pageSize), wrapper);
+        return Result.success(page);
+    }
+
+}

@@ -1,0 +1,24 @@
+server:
+  port: 8081
+
+# Database Configuration
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root   #Database username
+    password: Xujieming0016   #Database password
+    url: jdbc:mysql://localhost:3306/manincorp-trading?
+      useSSL=false&
+      useUnicode=true&characterEncoding=utf-8&
+      allowMultiQueries=true&useSSL=false&
+      serverTimezone=GMT%2b8&
+      allowPublicKeyRetrieval=true
+  servlet:
+    multipart:
+      max-file-size: 100MB     #Maximum size per uploaded file
+      max-request-size: 100MB  #Maximum size for a single request
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #Enable SQL logging
+    map-underscore-to-camel-case: true

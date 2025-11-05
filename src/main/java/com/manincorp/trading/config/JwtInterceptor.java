@@ -40,7 +40,8 @@ public class JwtInterceptor implements HandlerInterceptor {
 
         String userId;
         try {
-            userId = JWT.decode(token).getClaim("userId").asString();
+            String userToken = JWT.decode(token).getAudience().get(0);
+            userId = userToken.split("-")[0];
             if (ObjectUtil.isEmpty(userId)) {
                 throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
             }
@@ -54,10 +55,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         }
 
         try {
-            Algorithm algorithm = Algorithm.HMAC256(Constants.JWT_SECRET);
-            JWTVerifier verifier = JWT.require(algorithm)
-                    .withClaim("userId", user.getId())
-                    .build();
+            JWTVerifier verifier = JWT.require(Algorithm.HMAC256(user.getPassword())).build();
             verifier.verify(token);
         } catch (JWTVerificationException e) {
             throw new CustomException(ResultCodeEnum.TOKEN_INVALID_ERROR);

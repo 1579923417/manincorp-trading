@@ -1,5 +1,6 @@
 package com.manincorp.trading.utils;
 
+import cn.hutool.core.date.DateUtil;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.stereotype.Component;
@@ -16,20 +17,14 @@ import java.util.Date;
 public class JwtTokenUtil {
 
     /**
-     * Token expiration time in milliseconds, set to 2 hours
-     */
-    public static final Long EXPIRATION_TIME = 1000L*60*60*2;
-
-    /**
      * Create a new JWT token.
      * @param data
      * @param sign
      * @return
      */
     public static String createToken(String data, String sign) {
-        return JWT.create()
-                .withAudience(data)
-                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+        return JWT.create().withAudience(data)
+                .withExpiresAt(DateUtil.offsetHour(new Date(), 2))
                 .sign(Algorithm.HMAC256(sign));
     }
 

@@ -1,6 +1,7 @@
 package com.manincorp.trading.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -20,8 +21,8 @@ public class User {
     private String username;
     private String password;
     private String nickname;
-    private String email;
-    private Long phone;
     private String avatar;
-    private String registerAt;
+
+    @TableField(exist = false)
+    private String token;
 }

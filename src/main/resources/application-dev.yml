@@ -19,6 +19,8 @@ spring:
       max-request-size: 100MB  #Maximum size for a single request
 
 mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.manincorp.trading.entity
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #Enable SQL logging
     map-underscore-to-camel-case: true

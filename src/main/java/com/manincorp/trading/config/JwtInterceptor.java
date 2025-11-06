@@ -11,6 +11,7 @@ import com.manincorp.trading.entity.User;
 import com.manincorp.trading.exception.CustomException;
 import com.manincorp.trading.service.UserService;
 import jakarta.annotation.Resource;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
@@ -31,11 +32,14 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader(Constants.TOKEN);
-        if (ObjectUtil.isEmpty(token)) {
-            token = request.getParameter(Constants.TOKEN);
-        }
-        if (ObjectUtil.isEmpty(token)) {
-            throw new CustomException(ResultCodeEnum.TOKEN_INVALID_ERROR);
+
+        if (ObjectUtil.isEmpty(token) && request.getCookies() != null) {
+            for (Cookie cookie : request.getCookies()) {
+                if (Constants.TOKEN.equals(cookie.getName())) {
+                    token = cookie.getValue();
+                    break;
+                }
+            }
         }
 
         String userId;

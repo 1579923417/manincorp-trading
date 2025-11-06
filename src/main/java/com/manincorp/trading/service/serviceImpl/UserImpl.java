@@ -4,6 +4,7 @@ import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.manincorp.trading.common.Constants;
 import com.manincorp.trading.common.enums.ResultCodeEnum;
+import com.manincorp.trading.common.enums.RoleEnum;
 import com.manincorp.trading.entity.User;
 import com.manincorp.trading.exception.CustomException;
 import com.manincorp.trading.mapper.UserMapper;
@@ -25,7 +26,7 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
     private  UserMapper userMapper;
 
     @Override
-    public User register(User user) {
+    public void register(User user) {
         User adUser = userMapper.selectByUsername(user.getUsername());
         if (ObjectUtil.isNotNull(adUser)) {
             throw new CustomException(ResultCodeEnum.USER_EXIST_ERROR);
@@ -36,10 +37,10 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
         if (ObjectUtil.isEmpty(user.getNickname())) {
             user.setNickname(user.getUsername());
         }
+        user.setRole(RoleEnum.USER.name());
         userMapper.insert(user);
-        return adUser;
     }
-    
+
     @Override
     public User login(User user) {
         User dbUser = userMapper.selectByUsername(user.getUsername());
@@ -49,7 +50,8 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
         if (!user.getPassword().equals(dbUser.getPassword())) {
             throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
         }
-        String tokenData = dbUser.getId() + "-" + dbUser.getUsername();
+
+        String tokenData = dbUser.getId() + "-" + dbUser.getUsername() + "-" + dbUser.getRole();
         String token = JwtTokenUtil.createToken(tokenData, dbUser.getPassword());
         dbUser.setToken(token);
         return dbUser;

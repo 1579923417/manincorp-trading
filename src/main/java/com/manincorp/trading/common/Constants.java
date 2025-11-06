@@ -10,7 +10,5 @@ public interface Constants {
 
     String TOKEN = "token";
 
-    String JWT_SECRET = "q3t6w9z$C&F)J@NcQfTjWnZr4u7x";
-
     String USER_DEFAULT_PASSWORD = "123456";
 }

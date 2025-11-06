@@ -68,8 +68,7 @@ public class WebController {
      */
     @PostMapping("/register")
     public Result register(@RequestBody User user) {
-        if (StrUtil.isBlank(user.getUsername()) || StrUtil.isBlank(user.getPassword())
-            || ObjectUtil.isEmpty(user.getRole())) {
+        if (StrUtil.isBlank(user.getUsername()) || StrUtil.isBlank(user.getPassword())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
         userService.register(user);

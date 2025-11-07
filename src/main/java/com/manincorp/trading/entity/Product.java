@@ -21,5 +21,4 @@ public class Product {
     private Integer categoryId;
     private String name;
     private String description;
-    private String createdAt;
 }

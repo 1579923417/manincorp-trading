@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manincorp.trading.mapper.ProductMapper">
+
+    <sql id="Base_Column_List">
+        id,brand_id,category_id,name,description,image
+    </sql>
+
+    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductDTO">
+        SELECT
+            product.id,
+            product.brand_id,
+            product.category_id,
+            product.name,
+            product.description,
+            product.image,
+            brand.name AS brandName,
+            product_category.name AS categoryName
+        FROM product
+            LEFT JOIN brand ON product.brand_id = brand.id
+            LEFT JOIN product_category ON product.category_id = product_category.id
+        <where>
+            <if test="product.name != null and product.name != ''">
+                AND product.name LIKE CONCAT('%', #{product.name}, '%')
+            </if>
+        </where>
+        ORDER BY product.id DESC
+    </select>
+
+    <select id="selectDetailById" resultType="com.manincorp.trading.dto.ProductDetailDTO">
+        SELECT
+            product.id,
+            product.name,
+            product.description,
+            product.image,
+            brand.name AS brandName,
+            product_category.name AS categoryName,
+            product_detail.introduction,
+            product_detail.content
+        FROM product
+            LEFT JOIN brand ON product.brand_id = brand.id
+            LEFT JOIN product_category ON product.category_id = product_category.id
+            LEFT JOIN product_detail ON product.id = product_detail.product_id
+        WHERE product.id = #{id}
+    </select>
+    <select id="selectAttributesByProductId"
+            resultType="com.manincorp.trading.entity.ProductAttribute">
+        SELECT id, product_id, name, value
+        FROM product_attribute
+        WHERE product_id = #{productId}
+        ORDER BY id
+    </select>
+
+
+</mapper>

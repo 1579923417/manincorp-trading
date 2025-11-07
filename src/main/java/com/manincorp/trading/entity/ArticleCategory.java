@@ -18,5 +18,4 @@ public class ArticleCategory {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String name;
-    private String createdAt;
 }

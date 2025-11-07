@@ -3,7 +3,7 @@ package com.manincorp.trading.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.manincorp.trading.dto.ArticleDTO;
+import com.manincorp.trading.dto.ArticlePageDTO;
 import com.manincorp.trading.entity.Article;
 import org.apache.ibatis.annotations.Param;
 
@@ -15,5 +15,5 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ArticleMapper extends BaseMapper<Article> {
 
-    IPage<ArticleDTO> selectPage(Page<ArticleDTO> page, @Param("article") Article article);
+    IPage<ArticlePageDTO> selectPage(Page<ArticlePageDTO> page, @Param("article") Article article);
 }

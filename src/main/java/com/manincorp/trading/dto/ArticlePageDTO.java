@@ -9,7 +9,7 @@ import lombok.Data;
  * Description:
 */
 @Data
-public class ArticleDTO {
+public class ArticlePageDTO {
     private Integer id;
     private String title;
     private String brandName;

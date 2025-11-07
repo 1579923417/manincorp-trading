@@ -1,8 +1,10 @@
 package com.manincorp.trading.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.common.Result;
+import com.manincorp.trading.dto.ProductCategoryPageDTO;
 import com.manincorp.trading.entity.ProductCategory;
 import com.manincorp.trading.service.ProductCategoryService;
 import jakarta.annotation.Resource;
@@ -81,9 +83,10 @@ public class ProductCategoryController {
      */
     @GetMapping("/selectPage")
     public Result selectPage(@RequestParam Integer pageNum,
-                             @RequestParam Integer pageSize){
-        QueryWrapper<ProductCategory> wrapper = new QueryWrapper<>();
-        Page<ProductCategory> page = productCategoryService.page(new Page<>(pageNum, pageSize), wrapper);
-        return Result.success(page);
+                             @RequestParam Integer pageSize,
+                             ProductCategory productCategory){
+        Page<ProductCategoryPageDTO> page = new Page<>(pageNum, pageSize);
+        IPage<ProductCategoryPageDTO> list = productCategoryService.selectPage(page, productCategory);
+        return Result.success(list);
     }
 }

@@ -4,11 +4,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.manincorp.trading.mapper.ProductMapper">
 
-    <sql id="Base_Column_List">
-        id,brand_id,category_id,name,description,image
-    </sql>
-
-    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductDTO">
+    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductPageDTO">
         SELECT
             product.id,
             product.brand_id,
@@ -29,7 +25,7 @@
         ORDER BY product.id DESC
     </select>
 
-    <select id="selectDetailById" resultType="com.manincorp.trading.dto.ProductDetailDTO">
+    <select id="selectDetailById" resultType="com.manincorp.trading.dto.ProductFullDTO">
         SELECT
             product.id,
             product.name,

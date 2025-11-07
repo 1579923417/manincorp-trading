@@ -4,4 +4,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.manincorp.trading.mapper.ProductCategoryMapper">
 
+    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductCategoryPageDTO">
+        SELECT
+            product_category.id,
+            product_category.brand_id,
+            product_category.name,
+            brand.name AS brandName
+        FROM product_category
+                 LEFT JOIN brand ON product_category.brand_id = brand.id
+        ORDER BY product_category.id DESC
+    </select>
 </mapper>

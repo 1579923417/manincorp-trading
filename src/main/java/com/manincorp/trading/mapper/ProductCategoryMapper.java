@@ -1,7 +1,12 @@
 package com.manincorp.trading.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.manincorp.trading.dto.ProductCategoryPageDTO;
 import com.manincorp.trading.entity.ProductCategory;
+import com.manincorp.trading.entity.ProductCategory;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * author: Jamie
@@ -10,4 +15,5 @@ import com.manincorp.trading.entity.ProductCategory;
  * Description:
  */
 public interface ProductCategoryMapper extends BaseMapper<ProductCategory> {
+    IPage<ProductCategoryPageDTO> selectPage(Page<ProductCategoryPageDTO> page, @Param("productCategory") ProductCategory productCategory);
 }

@@ -13,7 +13,7 @@ import java.util.List;
  *              detailed introduction, content, and associated attributes
  */
 @Data
-public class ProductDetailDTO {
+public class ProductFullDTO {
     private Integer id;
     private String name;
     private String description;

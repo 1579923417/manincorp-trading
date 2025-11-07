@@ -1,6 +1,10 @@
 package com.manincorp.trading.service.serviceImpl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.manincorp.trading.dto.ProductCategoryPageDTO;
+import com.manincorp.trading.entity.ProductCategory;
 import com.manincorp.trading.entity.ProductCategory;
 import com.manincorp.trading.mapper.ProductCategoryMapper;
 import com.manincorp.trading.service.ProductCategoryService;
@@ -14,4 +18,9 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductCategoryImpl extends ServiceImpl<ProductCategoryMapper, ProductCategory> implements ProductCategoryService {
+
+    @Override
+    public IPage<ProductCategoryPageDTO> selectPage(Page<ProductCategoryPageDTO> page, ProductCategory productCategory) {
+        return baseMapper.selectPage(page, productCategory);
+    }
 }

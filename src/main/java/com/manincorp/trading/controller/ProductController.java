@@ -1,11 +1,10 @@
 package com.manincorp.trading.controller;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.common.Result;
-import com.manincorp.trading.dto.ProductDTO;
-import com.manincorp.trading.dto.ProductDetailDTO;
+import com.manincorp.trading.dto.ProductPageDTO;
+import com.manincorp.trading.dto.ProductFullDTO;
 import com.manincorp.trading.entity.Product;
 import com.manincorp.trading.service.ProductService;
 import jakarta.annotation.Resource;
@@ -67,7 +66,7 @@ public class ProductController {
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
-        ProductDetailDTO dto = productService.selectDetailById(id);
+        ProductFullDTO dto = productService.selectDetailById(id);
         return Result.success(dto);
     }
 
@@ -87,8 +86,8 @@ public class ProductController {
     public Result selectPage(@RequestParam Integer pageNum,
                              @RequestParam Integer pageSize,
                              Product product) {
-        Page<ProductDTO> page = new Page<>(pageNum, pageSize);
-        IPage<ProductDTO> list = productService.selectPage(page, product);
+        Page<ProductPageDTO> page = new Page<>(pageNum, pageSize);
+        IPage<ProductPageDTO> list = productService.selectPage(page, product);
         return Result.success(list);
     }
 }

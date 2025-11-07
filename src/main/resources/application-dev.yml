@@ -1,6 +1,11 @@
 server:
   port: 8081
 
+#file config
+file:
+  ip: 116.198.205.248
+  port: 8081
+
 # Database Configuration
 spring:
   datasource:

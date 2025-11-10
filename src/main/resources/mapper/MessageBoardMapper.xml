@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manincorp.trading.mapper.MessageBoardMapper">
+
+
+    <select id="selectPage" resultType="com.manincorp.trading.dto.MessageBoardPageDTO">
+        SELECT
+            message_board.id,
+            message_board.user_id,
+            message_board.email,
+            message_board.content,
+            message_board.created_at,
+            user.nickname AS nickname,
+            user.username AS username,
+            user.phone AS phone
+        FROM message_board
+                 LEFT JOIN user ON message_board.user_id = user.id
+        ORDER BY message_board.id DESC
+    </select>
+
+</mapper>

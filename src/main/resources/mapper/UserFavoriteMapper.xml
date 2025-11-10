@@ -14,8 +14,8 @@
         FROM user_favorite
                  LEFT JOIN product ON user_favorite.product_id = product.id
         <where>
-            <if test="userFavorite.productName != null and userFavorite.productName != ''">
-                AND product.name LIKE CONCAT('%', #{userFavorite.productName}, '%')
+            <if test="userFavoritePageDTO.productName != null and userFavoritePageDTO.productName != ''">
+                AND product.name LIKE CONCAT('%', #{userFavoritePageDTO.productName}, '%')
             </if>
         </where>
         ORDER BY user_favorite.id DESC

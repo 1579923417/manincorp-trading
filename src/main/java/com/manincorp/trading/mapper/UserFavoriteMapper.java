@@ -16,7 +16,7 @@ import org.apache.ibatis.annotations.Param;
  * Description:
  */
 public interface UserFavoriteMapper extends BaseMapper<UserFavorite> {
-    IPage<UserFavoritePageDTO> selectPage(Page<UserFavoritePageDTO> page, @Param("userFavorite") UserFavoritePageDTO userFavoritePageDTO);
+    IPage<UserFavoritePageDTO> selectPage(Page<UserFavoritePageDTO> page, @Param("userFavoritePageDTO") UserFavoritePageDTO userFavoritePageDTO);
 
     int existsByUserIdAndProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);
 

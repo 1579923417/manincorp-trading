@@ -27,4 +27,9 @@
         ORDER BY article.id DESC
     </select>
 
+    <update id="updateViewCount">
+        UPDATE article
+        SET view_count = view_count + 1
+        WHERE id = #{id}
+    </update>
 </mapper>

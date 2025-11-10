@@ -16,5 +16,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface ArticleService extends IService<Article> {
 
+    void incrementViewCount(Integer id);
+
     IPage<ArticlePageDTO> selectPage(Page<ArticlePageDTO> page, Article article);
 }

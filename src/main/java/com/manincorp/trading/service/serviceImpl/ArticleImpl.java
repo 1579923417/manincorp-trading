@@ -25,7 +25,14 @@ public class ArticleImpl extends ServiceImpl<ArticleMapper, Article> implements 
     @Override
     public boolean save(Article article) {
         article.setCreatedAt(SetDateTimeUtil.getNowTime());
+        article.setPublishStatus(0);
+        article.setViewCount(0);
         return super.save(article);
+    }
+
+    @Override
+    public void incrementViewCount(Integer id) {
+        baseMapper.updateViewCount(id);
     }
 
     @Override

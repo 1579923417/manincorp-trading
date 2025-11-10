@@ -65,6 +65,7 @@ public class ArticleController {
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {
+        articleService.incrementViewCount(id);
         Article article = articleService.getById(id);
         return Result.success(article);
     }

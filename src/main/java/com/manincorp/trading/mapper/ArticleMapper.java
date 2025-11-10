@@ -16,4 +16,6 @@ import org.apache.ibatis.annotations.Param;
 public interface ArticleMapper extends BaseMapper<Article> {
 
     IPage<ArticlePageDTO> selectPage(Page<ArticlePageDTO> page, @Param("article") Article article);
+
+    void updateViewCount(@Param("id") Integer id);
 }

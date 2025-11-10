@@ -15,6 +15,9 @@ public enum ResultCodeEnum {
     USER_NOT_EXIST_ERROR("5004", "用户不存在"),
     PARAM_PASSWORD_ERROR("5005", "原密码输入错误"),
     USER_NO_PERMISSION_ERROR("5006", "普通用户无权限登录后台"),
+
+    ALREADY_FAVORITE("5007", "该产品已收藏，无需重复收藏"),
+    NO_FAVORITE_FOUND("5008", "未找到收藏记录")
     ;
 
     public String code;

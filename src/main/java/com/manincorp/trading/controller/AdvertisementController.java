@@ -17,7 +17,7 @@ import java.util.List;
  * Description:
  */
 @RestController
-@RequestMapping("advertisement")
+@RequestMapping("/advertisement")
 public class AdvertisementController {
 
     @Resource

@@ -4,10 +4,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.manincorp.trading.dto.ProductCategoryPageDTO;
+import com.manincorp.trading.entity.Article;
 import com.manincorp.trading.entity.ProductCategory;
 import com.manincorp.trading.entity.ProductCategory;
 import com.manincorp.trading.mapper.ProductCategoryMapper;
 import com.manincorp.trading.service.ProductCategoryService;
+import com.manincorp.trading.utils.SetDateTimeUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -18,6 +20,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ProductCategoryImpl extends ServiceImpl<ProductCategoryMapper, ProductCategory> implements ProductCategoryService {
+    @Override
+    public boolean save(ProductCategory productCategory) {
+        productCategory.setCreatedAt(SetDateTimeUtil.getNowTime());
+        return super.save(productCategory);
+    }
 
     @Override
     public IPage<ProductCategoryPageDTO> selectPage(Page<ProductCategoryPageDTO> page, ProductCategory productCategory) {

@@ -10,6 +10,7 @@
         product_detail.product_id,
         product_detail.introduction,
         product_detail.content,
+        product_detail.created_at,
         product.name AS productName
         FROM product_detail
         LEFT JOIN product ON product_detail.product_id = product.id

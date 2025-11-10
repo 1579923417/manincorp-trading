@@ -19,4 +19,5 @@ public class ProductCategory {
     private Integer id;
     private Integer brandId;
     private String name;
+    private String createdAt;
 }

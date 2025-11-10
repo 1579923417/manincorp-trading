@@ -15,6 +15,7 @@ public class ProductDetail {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private String productId;
-    private String Introduction;
+    private String introduction;
     private String content;
+    private String createdAt;
 }

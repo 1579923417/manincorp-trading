@@ -17,4 +17,5 @@ public class UserFavorite {
     private Integer id;
     private Integer userId;
     private Integer productId;
+    private String createdAt;
 }

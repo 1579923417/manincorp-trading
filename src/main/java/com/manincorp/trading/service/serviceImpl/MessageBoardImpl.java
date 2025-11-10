@@ -10,6 +10,7 @@ import com.manincorp.trading.entity.MessageBoard;
 import com.manincorp.trading.mapper.MessageBoardMapper;
 import com.manincorp.trading.service.ArticleService;
 import com.manincorp.trading.service.MessageBoardService;
+import com.manincorp.trading.utils.SetDateTimeUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,6 +21,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class MessageBoardImpl extends ServiceImpl<MessageBoardMapper, MessageBoard> implements MessageBoardService {
+    @Override
+    public boolean save(MessageBoard messageBoard) {
+        messageBoard.setCreatedAt(SetDateTimeUtil.getNowTime());
+        return super.save(messageBoard);
+    }
+
     @Override
     public IPage<MessageBoardPageDTO> selectPage(Page<MessageBoardPageDTO> page, MessageBoard messageBoard) {
         return baseMapper.selectPage(page, messageBoard);

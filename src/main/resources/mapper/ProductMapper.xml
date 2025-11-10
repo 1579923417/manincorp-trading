@@ -12,6 +12,7 @@
             product.name,
             product.description,
             product.image,
+            product.created_at,
             brand.name AS brandName,
             product_category.name AS categoryName
         FROM product
@@ -31,6 +32,7 @@
             product.name,
             product.description,
             product.image,
+            product.created_at,
             brand.name AS brandName,
             product_category.name AS categoryName,
             product_detail.introduction,

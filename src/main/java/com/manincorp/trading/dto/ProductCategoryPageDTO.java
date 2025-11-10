@@ -13,4 +13,5 @@ public class ProductCategoryPageDTO {
     private Integer id;
     private String brandName;
     private String name;
+    private String createdAt;
 }

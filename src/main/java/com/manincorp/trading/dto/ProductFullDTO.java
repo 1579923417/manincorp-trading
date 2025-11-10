@@ -20,6 +20,7 @@ public class ProductFullDTO {
     private String image;
     private String brandName;
     private String categoryName;
+    private String createdAt;
 
     // product_detail
     private String introduction;

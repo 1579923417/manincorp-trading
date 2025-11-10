@@ -7,7 +7,11 @@ import com.manincorp.trading.dto.ArticlePageDTO;
 import com.manincorp.trading.entity.Article;
 import com.manincorp.trading.mapper.ArticleMapper;
 import com.manincorp.trading.service.ArticleService;
+import com.manincorp.trading.utils.SetDateTimeUtil;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 /**
  * author: Jamie
@@ -17,6 +21,12 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ArticleImpl extends ServiceImpl<ArticleMapper, Article> implements ArticleService {
+
+    @Override
+    public boolean save(Article article) {
+        article.setCreatedAt(SetDateTimeUtil.getNowTime());
+        return super.save(article);
+    }
 
     @Override
     public IPage<ArticlePageDTO> selectPage(Page<ArticlePageDTO> page, Article article) {

@@ -10,6 +10,7 @@ import com.manincorp.trading.exception.CustomException;
 import com.manincorp.trading.mapper.UserMapper;
 import com.manincorp.trading.service.UserService;
 import com.manincorp.trading.utils.JwtTokenUtil;
+import com.manincorp.trading.utils.SetDateTimeUtil;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +39,7 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
             user.setNickname(user.getUsername());
         }
         user.setRole(RoleEnum.USER.name());
+        user.setCreatedAt(SetDateTimeUtil.getNowTime());
         userMapper.insert(user);
     }
 

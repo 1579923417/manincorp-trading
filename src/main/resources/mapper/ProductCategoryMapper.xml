@@ -9,6 +9,7 @@
             product_category.id,
             product_category.brand_id,
             product_category.name,
+            product_category.created_at,
             brand.name AS brandName
         FROM product_category
                  LEFT JOIN brand ON product_category.brand_id = brand.id

@@ -23,4 +23,5 @@ public class UserEventLog {
     private Integer productId;
     private Integer productCategoryId;
     private String  createdAt;
+    private Integer articleCategoryId;
 }

@@ -1,10 +1,13 @@
 package com.manincorp.trading.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.common.Result;
+import com.manincorp.trading.dto.UserEventLogPageDTO;
 import com.manincorp.trading.entity.UserEventLog;
 import com.manincorp.trading.service.UserEventLogService;
+import com.manincorp.trading.utils.SetDateTimeUtil;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,10 +27,10 @@ public class UserEventLogController {
     private UserEventLogService userEventLogService;
 
     /**
-     * add
+     * track
      */
-    @PostMapping("/add")
-    public Result add(@RequestBody UserEventLog userEventLog) {
+    @PostMapping("/track")
+    public Result trackEvent(@RequestBody UserEventLog userEventLog) {
         userEventLogService.save(userEventLog);
         return Result.success(userEventLog);
     }
@@ -82,9 +85,10 @@ public class UserEventLogController {
      */
     @GetMapping("/selectPage")
     public Result selectPage(@RequestParam Integer pageNum,
-                             @RequestParam Integer pageSize) {
-        QueryWrapper<UserEventLog> wrapper = new QueryWrapper<>();
-        Page<UserEventLog> page = userEventLogService.page(new Page<>(pageNum, pageSize), wrapper);
-        return Result.success(page);
+                             @RequestParam Integer pageSize,
+                             UserEventLogPageDTO userEventLogPageDTO) {
+        Page<UserEventLogPageDTO> page = new Page<>(pageNum, pageSize);
+        IPage<UserEventLogPageDTO> list = userEventLogService.selectPage(page, userEventLogPageDTO);
+        return Result.success(list);
     }
 }

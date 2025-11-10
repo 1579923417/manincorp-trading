@@ -11,6 +11,7 @@ import lombok.Data;
 @Data
 public class ProductDetailPageDTO {
     private Integer id;
+    private Integer productId;
     private String productName;
     private String introduction;
     private String content;

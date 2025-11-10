@@ -12,7 +12,9 @@ import lombok.Data;
 public class ArticlePageDTO {
     private Integer id;
     private String title;
+    private Integer brandId;
     private String brandName;
+    private Integer categoryId;
     private String articleCategoryName;
     private String content;
     private Integer publishStatus;

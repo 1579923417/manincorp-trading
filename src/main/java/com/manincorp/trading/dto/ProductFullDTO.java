@@ -18,6 +18,7 @@ public class ProductFullDTO {
     private String name;
     private String description;
     private String image;
+    private Integer brandId;
     private String brandName;
     private String categoryName;
     private String createdAt;

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manincorp.trading.mapper.UserFavoriteMapper">
+
+    <select id="selectPage" resultType="com.manincorp.trading.dto.UserFavoritePageDTO">
+        SELECT
+            user_favorite.id,
+            user_favorite.user_id,
+            user_favorite.product_id,
+            product.name AS productName
+        FROM user_favorite
+                 LEFT JOIN product ON user_favorite.product_id = product.id
+        <where>
+            <if test="userFavorite.productName != null and userFavorite.productName != ''">
+                AND product.name LIKE CONCAT('%', #{userFavorite.productName}, '%')
+            </if>
+        </where>
+        ORDER BY user_favorite.id DESC
+    </select>
+
+    <select id="existsByUserIdAndProductId" resultType="int" parameterType="map">
+        SELECT COUNT(1)
+        FROM user_favorite
+        WHERE user_id = #{userId}
+          AND product_id = #{productId}
+    </select>
+
+    <delete id="deleteByUserIdAndProductId" parameterType="map">
+        DELETE FROM user_favorite
+        WHERE user_id = #{userId}
+          AND product_id = #{productId}
+    </delete>
+</mapper>
+

@@ -17,7 +17,9 @@ public enum ResultCodeEnum {
     USER_NO_PERMISSION_ERROR("5006", "普通用户无权限登录后台"),
 
     ALREADY_FAVORITE("5007", "该产品已收藏，无需重复收藏"),
-    NO_FAVORITE_FOUND("5008", "未找到收藏记录")
+    NO_FAVORITE_FOUND("5008", "未找到收藏记录"),
+
+    UPLOAD_FILE_EMPTY("5009", "上传文件为空，请选择文件上传")
     ;
 
     public String code;

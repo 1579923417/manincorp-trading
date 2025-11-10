@@ -4,6 +4,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.StrUtil;
 import com.manincorp.trading.common.Result;
+import com.manincorp.trading.common.enums.ResultCodeEnum;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -37,6 +38,10 @@ public class FileController {
      */
     @PostMapping("/upload")
     public Result upload(MultipartFile file) {
+        if (file == null || file.isEmpty()) {
+            return Result.error(ResultCodeEnum.UPLOAD_FILE_EMPTY);
+        }
+
         String flag;
         synchronized (FileController.class) {
             flag = System.currentTimeMillis() + "";

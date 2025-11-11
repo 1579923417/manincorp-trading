@@ -87,4 +87,13 @@ public class AdvertisementController {
         Page<Advertisement> page = advertisementService.page(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(page);
     }
+
+    /**
+     * query based on advertisement location
+     */
+    @GetMapping("/selectByPosition")
+    public Result selectByPosition(@RequestParam(required = false) String position) {
+        List<Advertisement> list = advertisementService.selectByPosition(position);
+        return Result.success(list);
+    }
 }

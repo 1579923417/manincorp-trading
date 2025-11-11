@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manincorp.trading.mapper.AdvertisementMapper">
+
+    <select id="selectByPosition" resultType="com.manincorp.trading.entity.Advertisement">
+        SELECT
+            advertisement.id,
+            advertisement.content,
+            advertisement.position,
+            advertisement.image_url,
+            advertisement.link_url,
+            advertisement.created_at
+        FROM advertisement
+        <where>
+            <if test="position != null and position !=''">
+                AND position LIKE CONCAT ('%', #{position}, '%')
+            </if>
+        </where>
+        ORDER BY advertisement.id DESC
+    </select>
+</mapper>

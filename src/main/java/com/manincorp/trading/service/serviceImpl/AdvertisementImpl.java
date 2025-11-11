@@ -9,6 +9,8 @@ import com.manincorp.trading.service.ArticleCategoryService;
 import com.manincorp.trading.utils.SetDateTimeUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * author: Jamie
  * Package: com.manincorp.trading.service.serviceImpl.AdvertisementImpl
@@ -21,5 +23,10 @@ public class AdvertisementImpl extends ServiceImpl<AdvertisementMapper, Advertis
     public boolean save(Advertisement advertisement) {
         advertisement.setCreatedAt(SetDateTimeUtil.getNowTime());
         return super.save(advertisement);
+    }
+
+    @Override
+    public List<Advertisement> selectByPosition(String position) {
+        return baseMapper.selectByPosition(position);
     }
 }

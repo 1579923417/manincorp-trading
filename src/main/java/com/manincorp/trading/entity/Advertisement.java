@@ -20,6 +20,7 @@ public class Advertisement {
     private String title;
     private String content;
     private String position;
+    private String imageUrl;
     private String linkUrl;
     private String createdAt;
 }

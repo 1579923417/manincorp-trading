@@ -12,7 +12,12 @@
             product_category.created_at,
             brand.name AS brandName
         FROM product_category
-                 LEFT JOIN brand ON product_category.brand_id = brand.id
+        LEFT JOIN brand ON product_category.brand_id = brand.id
+        <where>
+            <if test="productCategory.brandId != null">
+                AND product_category.brand_id = #{productCategory.brandId}
+            </if>
+        </where>
         ORDER BY product_category.id DESC
     </select>
 </mapper>

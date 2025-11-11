@@ -82,8 +82,8 @@ public class ProductCategoryController {
      * page
      */
     @GetMapping("/selectPage")
-    public Result selectPage(@RequestParam Integer pageNum,
-                             @RequestParam Integer pageSize,
+    public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize,
                              ProductCategory productCategory){
         Page<ProductCategoryPageDTO> page = new Page<>(pageNum, pageSize);
         IPage<ProductCategoryPageDTO> list = productCategoryService.selectPage(page, productCategory);

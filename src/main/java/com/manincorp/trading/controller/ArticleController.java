@@ -84,8 +84,8 @@ public class ArticleController {
      * page
      */
     @GetMapping("/selectPage")
-    public Result selectPage(@RequestParam Integer pageNum,
-                             @RequestParam Integer pageSize,
+    public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize,
                              Article article) {
         Page<ArticlePageDTO> page = new Page<>(pageNum, pageSize);
         IPage<ArticlePageDTO> list = articleService.selectPage(page, article);

@@ -83,8 +83,8 @@ public class ProductController {
      * page
      */
     @GetMapping("/selectPage")
-    public Result selectPage(@RequestParam Integer pageNum,
-                             @RequestParam Integer pageSize,
+    public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize,
                              Product product) {
         Page<ProductPageDTO> page = new Page<>(pageNum, pageSize);
         IPage<ProductPageDTO> list = productService.selectPage(page, product);

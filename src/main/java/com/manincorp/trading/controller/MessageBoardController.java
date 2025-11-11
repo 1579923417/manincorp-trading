@@ -83,8 +83,8 @@ public class MessageBoardController {
      * page
      */
     @GetMapping("/selectPage")
-    public Result selectPage(@RequestParam Integer pageNum,
-                             @RequestParam Integer pageSize,
+    public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize,
                              MessageBoard messageBoard) {
         Page<MessageBoardPageDTO> page = new Page<>(pageNum, pageSize);
         IPage<MessageBoardPageDTO> list = messageBoardService.selectPage(page, messageBoard);

@@ -1,11 +1,11 @@
 package com.manincorp.trading.service.serviceImpl;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.manincorp.trading.entity.Article;
+import com.manincorp.trading.dto.ProductAttributePageDTO;
 import com.manincorp.trading.entity.ProductAttribute;
-import com.manincorp.trading.mapper.ArticleMapper;
 import com.manincorp.trading.mapper.ProductAttributeMapper;
-import com.manincorp.trading.service.ArticleService;
 import com.manincorp.trading.service.ProductAttributeService;
 import com.manincorp.trading.utils.SetDateTimeUtil;
 import org.springframework.stereotype.Service;
@@ -22,5 +22,10 @@ public class ProductAttributeImpl extends ServiceImpl<ProductAttributeMapper, Pr
     public boolean save(ProductAttribute productAttribute) {
         productAttribute.setCreatedAt(SetDateTimeUtil.getNowTime());
         return super.save(productAttribute);
+    }
+
+    @Override
+    public IPage<ProductAttributePageDTO> selectPage(Page<ProductAttributePageDTO> page, ProductAttribute productAttribute) {
+        return baseMapper.selectPage(page, productAttribute);
     }
 }

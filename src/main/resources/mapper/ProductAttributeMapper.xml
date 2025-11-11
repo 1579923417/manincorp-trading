@@ -4,4 +4,25 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.manincorp.trading.mapper.ProductAttributeMapper">
 
+    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductAttributePageDTO">
+        SELECT
+        product_attribute.id,
+        product_attribute.title,
+        product_attribute.brand_id,
+        product_attribute.category_id,
+        product_attribute.content,
+        product_attribute.publish_status,
+        product_attribute.view_count,
+        product_attribute.created_at,
+        product.name AS productName
+        FROM product_attribute
+        LEFT JOIN product_attribute ON product_attribute.product_id = product.id
+        <where>
+            <if test="productAttribute.name != null and productAttribute.name != ''">
+                AND productAttribute.name LIKE CONCAT('%', #{productAttribute.name}, '%')
+            </if>
+        </where>
+        ORDER BY product_attribute.id DESC
+    </select>
+
 </mapper>

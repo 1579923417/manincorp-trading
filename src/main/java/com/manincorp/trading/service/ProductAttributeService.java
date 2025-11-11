@@ -1,6 +1,9 @@
 package com.manincorp.trading.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.manincorp.trading.dto.ProductAttributePageDTO;
 import com.manincorp.trading.entity.ProductAttribute;
 import org.springframework.stereotype.Service;
 
@@ -11,4 +14,5 @@ import org.springframework.stereotype.Service;
  * Description:
  */
 public interface ProductAttributeService extends IService<ProductAttribute> {
+    IPage<ProductAttributePageDTO> selectPage(Page<ProductAttributePageDTO> page, ProductAttribute productAttribute);
 }

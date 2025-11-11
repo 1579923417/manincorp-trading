@@ -1,6 +1,9 @@
 package com.manincorp.trading.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.common.Result;
+import com.manincorp.trading.dto.ProductAttributePageDTO;
 import com.manincorp.trading.entity.ProductAttribute;
 import com.manincorp.trading.service.ProductAttributeService;
 import jakarta.annotation.Resource;
@@ -76,16 +79,16 @@ public class ProductAttributeController {
         return Result.success(productAttributelist);
     }
 
-//    /**
-//     * page
-//     */
-//    @GetMapping("/selectPage")
-//    public Result selectPage(@RequestParam Integer pageNum,
-//                             @RequestParam Integer pageSize,
-//                             ProductAttribute productAttribute) {
-//        Page<ProductAttributeDTO> page = new Page<>(pageNum, pageSize);
-//        IPage<ProductAttributeDTO> list = productAttributeService.selectPage(page, productAttribute);
-//        return Result.success(list);
-//    }
+    /**
+     * page
+     */
+    @GetMapping("/selectPage")
+    public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize,
+                             ProductAttribute productAttribute) {
+        Page<ProductAttributePageDTO> page = new Page<>(pageNum, pageSize);
+        IPage<ProductAttributePageDTO> list = productAttributeService.selectPage(page, productAttribute);
+        return Result.success(list);
+    }
 
 }

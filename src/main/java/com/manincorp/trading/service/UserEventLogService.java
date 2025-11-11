@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
  * Date: 2025-11-04 10:36
  * Description:
  */
-@Service
 public interface UserEventLogService extends IService<UserEventLog> {
 
     IPage<UserEventLogPageDTO> selectPage(Page<UserEventLogPageDTO> page, UserEventLogPageDTO userEventLogPageDTO);

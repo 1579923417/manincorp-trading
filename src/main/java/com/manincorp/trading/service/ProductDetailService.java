@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
  * Date: 2025-11-06 18:13
  * Description:
  */
-@Service
 public interface ProductDetailService extends IService<ProductDetail> {
     IPage<ProductDetailPageDTO> selectPage(Page<ProductDetailPageDTO> page, ProductDetail productDetail);
 }

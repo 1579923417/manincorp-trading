@@ -10,6 +10,5 @@ import org.springframework.stereotype.Service;
  * Date: 2025-11-06 18:12
  * Description:
  */
-@Service
 public interface ProductAttributeService extends IService<ProductAttribute> {
 }

@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
  * Date: 2025-11-10 09:31
  * Description:
  */
-@Service
 public interface UserFavoriteService extends IService<UserFavorite> {
     IPage<UserFavoritePageDTO> selectPage(Page<UserFavoritePageDTO> page, UserFavoritePageDTO userFavoritePageDTO);
 

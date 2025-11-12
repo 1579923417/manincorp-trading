@@ -29,4 +29,9 @@ public class ProductDetailImpl extends ServiceImpl<ProductDetailMapper, ProductD
     public IPage<ProductDetailPageDTO> selectPage(Page<ProductDetailPageDTO> page, ProductDetail productDetail) {
         return baseMapper.selectPage(page, productDetail);
     }
+
+    @Override
+    public ProductDetailPageDTO selectByProductId(Integer id) {
+        return baseMapper.selectByProductId(id);
+    }
 }

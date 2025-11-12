@@ -2,9 +2,10 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.manincorp.trading.mapper.ProductCategoryMapper">
 
-    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductCategoryPageDTO">
+    <sql id="BaseSelect">
         SELECT
             product_category.id,
             product_category.brand_id,
@@ -12,12 +13,30 @@
             product_category.created_at,
             brand.name AS brandName
         FROM product_category
-        LEFT JOIN brand ON product_category.brand_id = brand.id
+                 LEFT JOIN brand ON product_category.brand_id = brand.id
+    </sql>
+
+    <!-- page -->
+    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductCategoryPageDTO">
+        <include refid="BaseSelect"/>
         <where>
             <if test="productCategory.brandId != null">
                 AND product_category.brand_id = #{productCategory.brandId}
             </if>
+            <!-- 可以添加其他条件 -->
         </where>
         ORDER BY product_category.id DESC
     </select>
+
+    <!-- query by brandId  -->
+    <select id="selectByBrandId" resultType="com.manincorp.trading.dto.ProductCategoryPageDTO">
+        <include refid="BaseSelect"/>
+        <where>
+            <if test="brandId != null">
+                AND product_category.brand_id = #{brandId}
+            </if>
+        </where>
+        ORDER BY product_category.id DESC
+    </select>
+
 </mapper>

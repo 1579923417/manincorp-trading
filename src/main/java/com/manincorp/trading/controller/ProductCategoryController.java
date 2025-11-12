@@ -89,4 +89,13 @@ public class ProductCategoryController {
         IPage<ProductCategoryPageDTO> list = productCategoryService.selectPage(page, productCategory);
         return Result.success(list);
     }
+
+    /**
+     *  Query by brandId
+     */
+    @GetMapping("/selectByBrandId/{id}")
+    public Result selectByBrandId(@PathVariable Integer id) {
+        List<ProductCategoryPageDTO> productCategoryPageDTOS = productCategoryService.selectByBrandId(id);
+        return Result.success(productCategoryPageDTOS);
+    }
 }

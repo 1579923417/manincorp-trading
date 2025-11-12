@@ -90,4 +90,13 @@ public class ProductDetailController {
         IPage<ProductDetailPageDTO> list = productDetailService.selectPage(page, productDetail);
         return Result.success(list);
     }
+
+    /**
+     * Query by productId
+     */
+    @GetMapping("/selectByProductId/{id}")
+    public Result selectByProductId(@PathVariable Integer id){
+        ProductDetailPageDTO productDetailPageDTO = productDetailService.selectByProductId(id);
+        return Result.success(productDetailPageDTO);
+    }
 }

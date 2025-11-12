@@ -10,6 +10,8 @@ import com.manincorp.trading.service.ProductAttributeService;
 import com.manincorp.trading.utils.SetDateTimeUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * author: Jamie
  * Package: com.manincorp.trading.service.serviceImpl.productAttributeImpl
@@ -27,5 +29,10 @@ public class ProductAttributeImpl extends ServiceImpl<ProductAttributeMapper, Pr
     @Override
     public IPage<ProductAttributePageDTO> selectPage(Page<ProductAttributePageDTO> page, ProductAttribute productAttribute) {
         return baseMapper.selectPage(page, productAttribute);
+    }
+
+    @Override
+    public List<ProductAttributePageDTO> selectByProductId(Integer id) {
+        return baseMapper.selectByProductId(id);
     }
 }

@@ -15,4 +15,6 @@ import org.springframework.stereotype.Service;
  */
 public interface ProductDetailService extends IService<ProductDetail> {
     IPage<ProductDetailPageDTO> selectPage(Page<ProductDetailPageDTO> page, ProductDetail productDetail);
+
+    ProductDetailPageDTO selectByProductId(Integer id);
 }

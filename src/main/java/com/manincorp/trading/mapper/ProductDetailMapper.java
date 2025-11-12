@@ -17,4 +17,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ProductDetailMapper extends BaseMapper<ProductDetail> {
     IPage<ProductDetailPageDTO> selectPage(Page<ProductDetailPageDTO> page, @Param("productDetail") ProductDetail productDetail);
+
+    ProductDetailPageDTO selectByProductId(Integer id);
 }

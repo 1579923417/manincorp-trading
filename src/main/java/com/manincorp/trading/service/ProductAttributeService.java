@@ -7,6 +7,8 @@ import com.manincorp.trading.dto.ProductAttributePageDTO;
 import com.manincorp.trading.entity.ProductAttribute;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * author: Jamie
  * Package: com.manincorp.trading.service.productAttributeMapper
@@ -15,4 +17,6 @@ import org.springframework.stereotype.Service;
  */
 public interface ProductAttributeService extends IService<ProductAttribute> {
     IPage<ProductAttributePageDTO> selectPage(Page<ProductAttributePageDTO> page, ProductAttribute productAttribute);
+
+    List<ProductAttributePageDTO> selectByProductId(Integer id);
 }

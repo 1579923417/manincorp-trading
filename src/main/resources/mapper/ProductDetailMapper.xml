@@ -2,18 +2,40 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.manincorp.trading.mapper.ProductDetailMapper">
 
-    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductDetailPageDTO">
+    <sql id="BaseSelect">
         SELECT
-        product_detail.id,
-        product_detail.product_id,
-        product_detail.introduction,
-        product_detail.content,
-        product_detail.created_at,
-        product.name AS productName
+            product_detail.id,
+            product_detail.product_id,
+            product_detail.introduction,
+            product_detail.content,
+            product_detail.created_at,
+            product.name AS productName
         FROM product_detail
-        LEFT JOIN product ON product_detail.product_id = product.id
+                 LEFT JOIN product ON product_detail.product_id = product.id
+    </sql>
+
+    <!-- page -->
+    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductDetailPageDTO">
+        <include refid="BaseSelect"/>
+        <where>
+            <if test="productId != null">
+                AND product_detail.product_id = #{productId}
+            </if>
+        </where>
+        ORDER BY product_detail.id DESC
+    </select>
+
+    <!-- query by productId  -->
+    <select id="selectByProductId" resultType="com.manincorp.trading.dto.ProductDetailPageDTO">
+        <include refid="BaseSelect"/>
+        <where>
+            <if test="productId != null">
+                AND product_detail.product_id = #{productId}
+            </if>
+        </where>
         ORDER BY product_detail.id DESC
     </select>
 </mapper>

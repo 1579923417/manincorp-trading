@@ -12,6 +12,8 @@ import com.manincorp.trading.service.ProductCategoryService;
 import com.manincorp.trading.utils.SetDateTimeUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * author: Jamie
  * Package: com.manincorp.trading.service.serviceImpl.ProductCategoryImpl
@@ -29,5 +31,10 @@ public class ProductCategoryImpl extends ServiceImpl<ProductCategoryMapper, Prod
     @Override
     public IPage<ProductCategoryPageDTO> selectPage(Page<ProductCategoryPageDTO> page, ProductCategory productCategory) {
         return baseMapper.selectPage(page, productCategory);
+    }
+
+    @Override
+    public List<ProductCategoryPageDTO> selectByBrandId(Integer id) {
+        return baseMapper.selectByBrandId(id);
     }
 }

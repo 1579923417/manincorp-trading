@@ -8,6 +8,8 @@ import com.manincorp.trading.entity.ProductCategory;
 import com.manincorp.trading.entity.ProductCategory;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * author: Jamie
  * Package: com.manincorp.trading.mapper.ProductCategoryMapper
@@ -16,4 +18,6 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ProductCategoryMapper extends BaseMapper<ProductCategory> {
     IPage<ProductCategoryPageDTO> selectPage(Page<ProductCategoryPageDTO> page, @Param("productCategory") ProductCategory productCategory);
+
+    List<ProductCategoryPageDTO> selectByBrandId(Integer id);
 }

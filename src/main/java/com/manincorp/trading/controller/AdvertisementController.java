@@ -89,7 +89,7 @@ public class AdvertisementController {
     }
 
     /**
-     * query based on advertisement location
+     * query by position
      */
     @GetMapping("/selectByPosition")
     public Result selectByPosition(@RequestParam(required = false) String position) {

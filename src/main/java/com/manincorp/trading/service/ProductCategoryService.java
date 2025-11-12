@@ -8,6 +8,8 @@ import com.manincorp.trading.entity.ProductCategory;
 import com.manincorp.trading.entity.ProductCategory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * author: Jamie
  * Package: com.manincorp.trading.service.ProductCategoryService
@@ -16,4 +18,6 @@ import org.springframework.stereotype.Service;
  */
 public interface ProductCategoryService extends IService<ProductCategory> {
     IPage<ProductCategoryPageDTO> selectPage(Page<ProductCategoryPageDTO> page, ProductCategory productCategory);
+
+    List<ProductCategoryPageDTO> selectByBrandId(Integer id);
 }

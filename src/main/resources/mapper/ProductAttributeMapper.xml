@@ -2,21 +2,38 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.manincorp.trading.mapper.ProductAttributeMapper">
 
-    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductAttributePageDTO">
+    <sql id="BaseSelect">
         SELECT
-        product_attribute.id,
-        product_attribute.product_id,
-        product_attribute.name,
-        product_attribute.value,
-        product_attribute.created_at,
-        product.name AS productName
+            product_attribute.id,
+            product_attribute.product_id,
+            product_attribute.name,
+            product_attribute.value,
+            product_attribute.created_at,
+            product.name AS productName
         FROM product_attribute
-        LEFT JOIN product ON product_attribute.product_id = product.id
+                 LEFT JOIN product ON product_attribute.product_id = product.id
+    </sql>
+
+    <!-- page -->
+    <select id="selectPage" resultType="com.manincorp.trading.dto.ProductAttributePageDTO">
+        <include refid="BaseSelect"/>
         <where>
-            <if test="productAttribute.name != null and productAttribute.name != ''">
-                AND productAttribute.name LIKE CONCAT('%', #{productAttribute.name}, '%')
+            <if test="productAttribute != null and productAttribute.name != null and productAttribute.name != ''">
+                AND product_attribute.name LIKE CONCAT('%', #{productAttribute.name}, '%')
+            </if>
+        </where>
+        ORDER BY product_attribute.id DESC
+    </select>
+
+    <!-- query by productId -->
+    <select id="selectByProductId" resultType="com.manincorp.trading.dto.ProductAttributePageDTO">
+        <include refid="BaseSelect"/>
+        <where>
+            <if test="productId != null">
+                AND product_attribute.product_id = #{productId}
             </if>
         </where>
         ORDER BY product_attribute.id DESC

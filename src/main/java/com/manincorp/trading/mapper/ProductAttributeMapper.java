@@ -9,6 +9,8 @@ import com.manincorp.trading.entity.Article;
 import com.manincorp.trading.entity.ProductAttribute;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.List;
+
 /**
  * author: Jamie
  * Package: com.manincorp.trading.mapper.productAttributeMapper
@@ -18,4 +20,6 @@ import org.apache.ibatis.annotations.Param;
 public interface ProductAttributeMapper extends BaseMapper<ProductAttribute> {
 
     IPage<ProductAttributePageDTO> selectPage(Page<ProductAttributePageDTO> page, @Param("productAttribute") ProductAttribute productAttribute);
+
+    List<ProductAttributePageDTO> selectByProductId(Integer id);
 }

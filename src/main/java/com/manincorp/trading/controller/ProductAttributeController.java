@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.common.Result;
 import com.manincorp.trading.dto.ProductAttributePageDTO;
+import com.manincorp.trading.dto.ProductDetailPageDTO;
 import com.manincorp.trading.entity.ProductAttribute;
 import com.manincorp.trading.service.ProductAttributeService;
 import jakarta.annotation.Resource;
@@ -91,4 +92,13 @@ public class ProductAttributeController {
         return Result.success(list);
     }
 
+
+    /**
+     * Query by productId
+     */
+    @GetMapping("/selectByProductId/{id}")
+    public Result selectByProductId(@PathVariable Integer id){
+        List<ProductAttributePageDTO> productAttributePageDTO = productAttributeService.selectByProductId(id);
+        return Result.success(productAttributePageDTO);
+    }
 }

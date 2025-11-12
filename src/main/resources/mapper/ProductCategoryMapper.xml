@@ -23,7 +23,6 @@
             <if test="productCategory.brandId != null">
                 AND product_category.brand_id = #{productCategory.brandId}
             </if>
-            <!-- 可以添加其他条件 -->
         </where>
         ORDER BY product_category.id DESC
     </select>

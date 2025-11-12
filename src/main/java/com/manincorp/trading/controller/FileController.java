@@ -51,7 +51,10 @@ public class FileController {
             flag = System.currentTimeMillis() + "";
             ThreadUtil.sleep(1L);
         }
+
         String fileName = file.getOriginalFilename();
+        String storedFileName = flag + "-" + fileName;
+
         try {
             if (!FileUtil.isDirectory(filePath)) {
                 FileUtil.mkdir(filePath);
@@ -61,9 +64,13 @@ public class FileController {
         } catch (Exception e) {
             System.err.println(fileName + "--文件上传失败");
         }
-        String http = "http://" + ip + ":" + port + "/files/";
-        return Result.success(http + flag + "-" + fileName);  //ps:http://localhost:9090/files/1697438073596-avatar.png
+        String httpUrl = "http://" + ip + ":" + port + "/files/" + storedFileName;
 
+        Map<String, Object> resMap = new HashMap<>();
+        resMap.put("fileName", storedFileName);
+        resMap.put("url", httpUrl);
+
+        return Result.success(resMap);
     }
 
 

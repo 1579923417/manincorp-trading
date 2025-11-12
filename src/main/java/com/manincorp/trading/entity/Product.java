@@ -20,6 +20,7 @@ public class Product {
     private Integer brandId;
     private Integer categoryId;
     private String name;
+    private String image;
     private String description;
     private String createdAt;
 }

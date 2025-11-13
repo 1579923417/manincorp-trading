@@ -32,14 +32,11 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) {
         String token = request.getHeader(Constants.TOKEN);
-
-        if (ObjectUtil.isEmpty(token) && request.getCookies() != null) {
-            for (Cookie cookie : request.getCookies()) {
-                if (Constants.TOKEN.equals(cookie.getName())) {
-                    token = cookie.getValue();
-                    break;
-                }
-            }
+        if (ObjectUtil.isEmpty(token)) {
+            token = request.getParameter(Constants.TOKEN);
+        }
+        if (ObjectUtil.isEmpty(token)) {
+            throw new CustomException(ResultCodeEnum.TOKEN_INVALID_ERROR);
         }
 
         String userId;

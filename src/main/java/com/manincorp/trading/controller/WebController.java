@@ -53,13 +53,6 @@ public class WebController {
         UserDTO dto = new UserDTO();
         BeanUtil.copyProperties(dbUser, dto);
 
-        //Create a new JWT token and store it a cookie
-        Cookie cookie = new Cookie(Constants.TOKEN, dbUser.getToken());
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(2 * 60 * 60);
-        response.addCookie(cookie);
-
         return Result.success(dto);
     }
 

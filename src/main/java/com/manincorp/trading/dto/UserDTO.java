@@ -15,4 +15,5 @@ public class UserDTO {
     private String nickname;
     private String avatar;
     private String role;
+    private String token;
 }

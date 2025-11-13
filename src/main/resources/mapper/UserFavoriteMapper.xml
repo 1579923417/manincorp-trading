@@ -17,6 +17,9 @@
             <if test="userFavoritePageDTO.productName != null and userFavoritePageDTO.productName != ''">
                 AND product.name LIKE CONCAT('%', #{userFavoritePageDTO.productName}, '%')
             </if>
+            <if test="userFavoritePageDTO.userId != null and userFavoritePageDTO.userId != ''">
+                AND user_favorite.user_id =  #{userFavoritePageDTO.userId}
+            </if>
         </where>
         ORDER BY user_favorite.id DESC
     </select>

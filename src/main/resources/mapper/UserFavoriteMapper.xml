@@ -10,7 +10,8 @@
             user_favorite.user_id,
             user_favorite.product_id,
             user_favorite.created_at,
-            product.name AS productName
+            product.name AS productName,
+            product.image AS productImage
         FROM user_favorite
                  LEFT JOIN product ON user_favorite.product_id = product.id
         <where>

@@ -14,5 +14,6 @@ public class UserFavoritePageDTO {
     private Integer userId;
     private Integer productId;
     private String productName;
+    private String productImage;
     private String createdAt;
 }

@@ -24,10 +24,10 @@
                 AND article.title LIKE CONCAT('%', #{article.title}, '%')
             </if>
             <if test="article.brandId != null and article.brandId != ''">
-                AND article.brand_id LIKE CONCAT('%', #{article.brandId}, '%')
+                AND article.brand_id = #{article.brandId}
             </if>
             <if test="article.categoryId != null and article.categoryId != ''">
-                AND article.category_id LIKE CONCAT('%', #{article.categoryId}, '%')
+                AND article.category_id = #{article.categoryId}
             </if>
         </where>
         ORDER BY article.id DESC

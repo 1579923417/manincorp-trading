@@ -33,7 +33,7 @@ public class UserController {
     }
 
     /**
-     * delete
+     * delete by id
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
@@ -51,16 +51,16 @@ public class UserController {
     }
 
     /**
-     * update
+     * update by id
      */
     @PutMapping("/update")
     public Result update(@RequestBody User user) {
         userService.updateById(user);
-        return Result.success(user);
+        return Result.success();
     }
 
     /**
-     * Query by ID
+     * Query by id
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {

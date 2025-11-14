@@ -33,7 +33,7 @@ public class BrandController {
     }
 
     /**
-     * delete
+     * delete by id
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
@@ -51,12 +51,12 @@ public class BrandController {
     }
 
     /**
-     * update
+     * update by id
      */
     @PutMapping("/update")
     public Result updateById(@RequestBody Brand brand) {
         brandService.updateById(brand);
-        return Result.success(brand);
+        return Result.success();
     }
 
     /**

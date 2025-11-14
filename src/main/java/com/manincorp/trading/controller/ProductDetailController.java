@@ -35,7 +35,7 @@ public class ProductDetailController {
     }
 
     /**
-     * delete
+     * delete by id
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
@@ -53,12 +53,12 @@ public class ProductDetailController {
     }
 
     /**
-     * update
+     * update by id
      */
     @PutMapping("/update")
     public Result updateById(@RequestBody ProductDetail productDetail) {
         productDetailService.updateById(productDetail);
-        return Result.success(productDetail);
+        return Result.success();
     }
 
 
@@ -68,12 +68,12 @@ public class ProductDetailController {
     @PutMapping("/updateByProductId")
     public Result updateByProductId(@RequestBody ProductDetail productDetail) {
         productDetailService.updateByProductId(productDetail);
-        return Result.success(productDetail);
+        return Result.success();
     }
 
 
     /**
-     * Query by ID
+     * Query by id
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {

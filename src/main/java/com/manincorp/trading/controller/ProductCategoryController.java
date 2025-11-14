@@ -34,7 +34,7 @@ public class ProductCategoryController {
     }
 
     /**
-     * delete
+     * delete by id
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
@@ -52,12 +52,12 @@ public class ProductCategoryController {
     }
 
     /**
-     * update
+     * update by id
      */
     @PutMapping("/update")
     public Result updateById(@RequestBody ProductCategory productCategory) {
         productCategoryService.updateById(productCategory);
-        return Result.success(productCategory);
+        return Result.success();
     }
 
     /**

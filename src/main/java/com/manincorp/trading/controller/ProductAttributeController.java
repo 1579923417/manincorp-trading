@@ -35,7 +35,7 @@ public class ProductAttributeController {
     }
 
     /**
-     * delete
+     * delete by id
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
@@ -53,12 +53,12 @@ public class ProductAttributeController {
     }
 
     /**
-     * update
+     * update by id
      */
     @PostMapping("/update")
     public Result updateById(@RequestBody ProductAttribute productAttribute) {
         productAttributeService.updateById(productAttribute);
-        return Result.success(productAttribute);
+        return Result.success();
     }
 
     /**

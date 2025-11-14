@@ -33,7 +33,7 @@ public class AdvertisementController {
     }
 
     /**
-     * delete
+     * delete by id
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
@@ -51,12 +51,12 @@ public class AdvertisementController {
     }
 
     /**
-     * update
+     * update by id
      */
     @PutMapping("/update")
     public Result updateById(@RequestBody Advertisement advertisement) {
         advertisementService.updateById(advertisement);
-        return Result.success(advertisement);
+        return Result.success();
     }
 
     /**

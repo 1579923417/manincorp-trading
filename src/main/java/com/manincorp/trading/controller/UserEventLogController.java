@@ -36,7 +36,7 @@ public class UserEventLogController {
     }
 
     /**
-     * delete
+     * delete by id
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
@@ -54,16 +54,16 @@ public class UserEventLogController {
     }
 
     /**
-     * update
+     * update by id
      */
     @PutMapping("/update")
     public Result updateById(@RequestBody UserEventLog userEventLog) {
         userEventLogService.updateById(userEventLog);
-        return Result.success(userEventLog);
+        return Result.success();
     }
 
     /**
-     * Query by ID
+     * Query by id
      */
     @GetMapping("/selectById/{id}")
     public Result selectById(@PathVariable Integer id) {

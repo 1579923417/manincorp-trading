@@ -34,7 +34,7 @@ public class MessageBoardController {
     }
 
     /**
-     * delete
+     * delete by id
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
@@ -52,12 +52,12 @@ public class MessageBoardController {
     }
 
     /**
-     * update
+     * update by id
      */
     @PostMapping("/update")
     public Result updateById(@RequestBody MessageBoard messageBoard) {
         messageBoardService.updateById(messageBoard);
-        return Result.success(messageBoard);
+        return Result.success();
     }
 
     /**

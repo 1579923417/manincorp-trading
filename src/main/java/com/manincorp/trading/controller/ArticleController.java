@@ -34,7 +34,7 @@ public class ArticleController {
     }
 
     /**
-     * delete
+     * delete by id
      */
     @DeleteMapping("/delete/{id}")
     public Result deleteById(@PathVariable Integer id) {
@@ -52,12 +52,12 @@ public class ArticleController {
     }
 
     /**
-     * update
+     * update by id
      */
     @PostMapping("/update")
     public Result updateById(@RequestBody Article article) {
         articleService.updateById(article);
-        return Result.success(article);
+        return Result.success();
     }
 
     /**

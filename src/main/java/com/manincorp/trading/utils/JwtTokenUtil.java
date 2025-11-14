@@ -62,7 +62,6 @@ public class JwtTokenUtil {
             if (ObjectUtil.isNotEmpty(token)) {
                 String userRole = JWT.decode(token).getAudience().get(0);
                 String Id = userRole.split("-")[0];
-                String userName = userRole.split("-")[1];
                 String role = userRole.split("-")[2];
                 if (RoleEnum.ADMIN.name().equals(role)) {
                     return staticUserService.getById(Id);
@@ -71,6 +70,6 @@ public class JwtTokenUtil {
         } catch (Exception e) {
             log.error("获取当前用户信息出错", e);
         }
-        return new User();  // 返回空的账号对象
+        return new User();
     }
 }

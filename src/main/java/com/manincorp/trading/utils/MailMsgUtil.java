@@ -22,7 +22,7 @@ import java.time.Duration;
 public class MailMsgUtil {
 
     @Value("${spring.mail.username}")
-    private String fromEmail; // 注入配置里的邮箱
+    private String fromEmail;
     @Resource
     private JavaMailSenderImpl mailSender;
     @Autowired
@@ -31,20 +31,14 @@ public class MailMsgUtil {
     public boolean mail(String toEmail) throws MessagingException {
 
         MimeMessage mimeMessage = mailSender.createMimeMessage();
-        //生成随机验证码
         String code = CodeGeneratorUtil.generateCode(6);
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-        //设置一个html邮件信息
         helper.setText("<p style='color: blue'>您的验证码为：" + code + "(有效期为一分钟)</p>", true);
-        //设置邮箱主题名
         helper.setSubject("万年贸易网站--验证码");
-        //发送给谁
-        //发给谁-》邮箱地址
         helper.setTo(toEmail);
-        //谁发的-》发送人邮箱
         helper.setFrom(fromEmail);
-        //将邮箱验证码以邮件地址为key存入redis,1分钟过期
-        redisTemplate.opsForValue().set(toEmail, code, Duration.ofMinutes(1));
+        // Store the code in Redis with 1-minute expiration
+        redisTemplate.opsForValue().set(toEmail, code, Duration.ofMinutes(3));
         mailSender.send(mimeMessage);
         return true;
     }

@@ -53,7 +53,7 @@ public class ProductController {
     }
 
     /**
-     * update
+     * update by id
      */
     @PutMapping("/update")
     public Result updateById(@RequestBody Product product) {

@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.manincorp.trading.dto.ProductDetailPageDTO;
-import com.manincorp.trading.entity.Article;
 import com.manincorp.trading.entity.ProductDetail;
 import com.manincorp.trading.mapper.ProductDetailMapper;
 import com.manincorp.trading.service.ProductDetailService;
@@ -33,5 +32,10 @@ public class ProductDetailImpl extends ServiceImpl<ProductDetailMapper, ProductD
     @Override
     public ProductDetailPageDTO selectByProductId(Integer id) {
         return baseMapper.selectByProductId(id);
+    }
+
+    @Override
+    public void updateByProductId(ProductDetail productDetail) {
+        baseMapper.updateByProductId(productDetail);
     }
 }

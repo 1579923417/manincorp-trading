@@ -38,4 +38,15 @@
         </where>
         ORDER BY product_detail.id DESC
     </select>
+
+    <!-- query by productId  -->
+    <update id="updateByProductId" parameterType="com.manincorp.trading.entity.ProductDetail">
+        UPDATE product_detail
+        <set>
+            <if test="introduction != null">introduction = #{introduction},</if>
+            <if test="content != null">content = #{content},</if>
+        </set>
+        WHERE product_id = #{productId}
+    </update>
+
 </mapper>

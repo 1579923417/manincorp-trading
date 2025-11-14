@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.common.Result;
 import com.manincorp.trading.dto.ProductDetailPageDTO;
+import com.manincorp.trading.entity.Product;
 import com.manincorp.trading.entity.ProductDetail;
 import com.manincorp.trading.service.ProductDetailService;
 import jakarta.annotation.Resource;
@@ -54,11 +55,22 @@ public class ProductDetailController {
     /**
      * update
      */
-    @PostMapping("/update")
+    @PutMapping("/update")
     public Result updateById(@RequestBody ProductDetail productDetail) {
         productDetailService.updateById(productDetail);
         return Result.success(productDetail);
     }
+
+
+    /**
+     * update by productId
+     */
+    @PutMapping("/updateByProductId")
+    public Result updateByProductId(@RequestBody ProductDetail productDetail) {
+        productDetailService.updateByProductId(productDetail);
+        return Result.success(productDetail);
+    }
+
 
     /**
      * Query by ID

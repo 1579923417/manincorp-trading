@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.manincorp.trading.dto.ProductDetailPageDTO;
 import com.manincorp.trading.entity.ProductDetail;
-import org.springframework.stereotype.Service;
 
 /**
  * author: Jamie
@@ -17,4 +16,6 @@ public interface ProductDetailService extends IService<ProductDetail> {
     IPage<ProductDetailPageDTO> selectPage(Page<ProductDetailPageDTO> page, ProductDetail productDetail);
 
     ProductDetailPageDTO selectByProductId(Integer id);
+
+    void updateByProductId(ProductDetail productDetail);
 }

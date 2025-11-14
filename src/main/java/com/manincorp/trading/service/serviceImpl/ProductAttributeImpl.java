@@ -7,7 +7,7 @@ import com.manincorp.trading.dto.ProductAttributePageDTO;
 import com.manincorp.trading.entity.ProductAttribute;
 import com.manincorp.trading.mapper.ProductAttributeMapper;
 import com.manincorp.trading.service.ProductAttributeService;
-import com.manincorp.trading.utils.SetDateTimeUtil;
+import com.manincorp.trading.utils.CurrentTimeUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +22,7 @@ import java.util.List;
 public class ProductAttributeImpl extends ServiceImpl<ProductAttributeMapper, ProductAttribute> implements ProductAttributeService {
     @Override
     public boolean save(ProductAttribute productAttribute) {
-        productAttribute.setCreatedAt(SetDateTimeUtil.getNowTime());
+        productAttribute.setCreatedAt(CurrentTimeUtil.getNowTime());
         return super.save(productAttribute);
     }
 

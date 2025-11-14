@@ -3,14 +3,11 @@ package com.manincorp.trading.service.serviceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.manincorp.trading.dto.ArticlePageDTO;
 import com.manincorp.trading.dto.MessageBoardPageDTO;
-import com.manincorp.trading.entity.Article;
 import com.manincorp.trading.entity.MessageBoard;
 import com.manincorp.trading.mapper.MessageBoardMapper;
-import com.manincorp.trading.service.ArticleService;
 import com.manincorp.trading.service.MessageBoardService;
-import com.manincorp.trading.utils.SetDateTimeUtil;
+import com.manincorp.trading.utils.CurrentTimeUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class MessageBoardImpl extends ServiceImpl<MessageBoardMapper, MessageBoard> implements MessageBoardService {
     @Override
     public boolean save(MessageBoard messageBoard) {
-        messageBoard.setCreatedAt(SetDateTimeUtil.getNowTime());
+        messageBoard.setCreatedAt(CurrentTimeUtil.getNowTime());
         return super.save(messageBoard);
     }
 

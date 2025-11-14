@@ -7,11 +7,8 @@ import com.manincorp.trading.dto.ArticlePageDTO;
 import com.manincorp.trading.entity.Article;
 import com.manincorp.trading.mapper.ArticleMapper;
 import com.manincorp.trading.service.ArticleService;
-import com.manincorp.trading.utils.SetDateTimeUtil;
+import com.manincorp.trading.utils.CurrentTimeUtil;
 import org.springframework.stereotype.Service;
-
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 
 /**
  * author: Jamie
@@ -24,7 +21,7 @@ public class ArticleImpl extends ServiceImpl<ArticleMapper, Article> implements 
 
     @Override
     public boolean save(Article article) {
-        article.setCreatedAt(SetDateTimeUtil.getNowTime());
+        article.setCreatedAt(CurrentTimeUtil.getNowTime());
         if (article.getPublishStatus() == null) {
             article.setPublishStatus(0);
         }

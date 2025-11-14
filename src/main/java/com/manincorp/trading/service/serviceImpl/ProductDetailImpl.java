@@ -7,7 +7,7 @@ import com.manincorp.trading.dto.ProductDetailPageDTO;
 import com.manincorp.trading.entity.ProductDetail;
 import com.manincorp.trading.mapper.ProductDetailMapper;
 import com.manincorp.trading.service.ProductDetailService;
-import com.manincorp.trading.utils.SetDateTimeUtil;
+import com.manincorp.trading.utils.CurrentTimeUtil;
 import org.springframework.stereotype.Service;
 
 /**
@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 public class ProductDetailImpl extends ServiceImpl<ProductDetailMapper, ProductDetail> implements ProductDetailService {
     @Override
     public boolean save(ProductDetail productDetail) {
-        productDetail.setCreatedAt(SetDateTimeUtil.getNowTime());
+        productDetail.setCreatedAt(CurrentTimeUtil.getNowTime());
         return super.save(productDetail);
     }
 

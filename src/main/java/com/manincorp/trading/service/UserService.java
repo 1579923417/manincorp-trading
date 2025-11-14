@@ -15,4 +15,6 @@ public interface UserService extends IService<User> {
     void register(User user);
 
     User login(User user);
+
+    void createAdmin(User user);
 }

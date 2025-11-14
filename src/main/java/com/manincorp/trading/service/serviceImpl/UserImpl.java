@@ -28,19 +28,12 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
 
     @Override
     public void register(User user) {
-        User adUser = userMapper.selectByUsername(user.getUsername());
-        if (ObjectUtil.isNotNull(adUser)) {
-            throw new CustomException(ResultCodeEnum.USER_EXIST_ERROR);
-        }
-        if (ObjectUtil.isEmpty(user.getPassword())) {
-            user.setPassword(Constants.USER_DEFAULT_PASSWORD);
-        }
-        if (ObjectUtil.isEmpty(user.getNickname())) {
-            user.setNickname(user.getUsername());
-        }
-        user.setRole(RoleEnum.USER.name());
-        user.setCreatedAt(SetDateTimeUtil.getNowTime());
-        userMapper.insert(user);
+        createUserWithRole(user, RoleEnum.USER);
+    }
+
+    @Override
+    public void createAdmin(User user) {
+        createUserWithRole(user, RoleEnum.ADMIN);
     }
 
     @Override
@@ -57,5 +50,22 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
         String token = JwtTokenUtil.createToken(tokenData, dbUser.getPassword());
         dbUser.setToken(token);
         return dbUser;
+    }
+
+    private void createUserWithRole(User user, RoleEnum role) {
+        User exist = userMapper.selectByUsername(user.getUsername());
+        if (ObjectUtil.isNotNull(exist)) {
+            throw new CustomException(ResultCodeEnum.USER_EXIST_ERROR);
+        }
+        if (ObjectUtil.isEmpty(user.getPassword())) {
+            user.setPassword(Constants.USER_DEFAULT_PASSWORD);
+        }
+        if (ObjectUtil.isEmpty(user.getNickname())) {
+            user.setNickname(user.getUsername());
+        }
+
+        user.setRole(role.name());
+        user.setCreatedAt(SetDateTimeUtil.getNowTime());
+        userMapper.insert(user);
     }
 }

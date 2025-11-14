@@ -13,8 +13,6 @@ public interface UserMapper extends BaseMapper<User> {
 
     /**
      * Retrieves a user by username
-     * @param username
-     * @return
      */
     User selectByUsername(String username);
 }

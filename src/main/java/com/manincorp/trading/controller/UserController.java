@@ -24,11 +24,11 @@ public class UserController {
     private UserService userService;
 
     /**
-     * add
+     * createAdmin
      */
-    @PostMapping("/add")
-    public Result add(@RequestBody User user) {
-        userService.save(user);
+    @PostMapping("/createAdmin")
+    public Result createAdmin(@RequestBody User user) {
+        userService.createAdmin(user);
         return Result.success(user);
     }
 

@@ -31,12 +31,12 @@ public class RedisConfig {
         return new LettuceConnectionFactory(config);
     }
 
-    // 配置RedisTemplate
+    // RedisTemplate configuration
     @Bean
     public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
-        // 创建RedisTemplate实例
+        // Create a RedisTemplate instance
         RedisTemplate<String, Object> template = new RedisTemplate<>();
-        // 设置连接工厂
+        // set the connection factory
         template.setConnectionFactory(connectionFactory);
         template.setDefaultSerializer(new GenericJackson2JsonRedisSerializer());
         template.setKeySerializer(new StringRedisSerializer());

@@ -19,7 +19,13 @@ public enum ResultCodeEnum {
     ALREADY_FAVORITE("5007", "该产品已收藏，无需重复收藏"),
     NO_FAVORITE_FOUND("5008", "未找到收藏记录"),
 
-    UPLOAD_FILE_EMPTY("5009", "上传文件为空，请选择文件上传")
+    UPLOAD_FILE_EMPTY("5009", "上传文件为空，请选择文件上传"),
+
+
+    MAIL_SEND_ERROR("5010", "邮件发送错误"),
+    VERIFICATION_CODE_EXPIRED("5011", "验证码已过期"),
+    VERIFICATION_CODE_ERROR("5012", "验证码错误"),
+
     ;
 
     public String code;

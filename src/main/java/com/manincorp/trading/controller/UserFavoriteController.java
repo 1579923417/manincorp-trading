@@ -61,4 +61,14 @@ public class UserFavoriteController {
         IPage<UserFavoritePageDTO> list = userFavoriteService.selectPage(page, userFavoritePageDTO);
         return Result.success(list);
     }
+
+    /**
+     * check if product is favorite by user
+     */
+    @GetMapping("/hasFavorited")
+    public Result hasFavorited(@RequestParam Integer userId,
+                             @RequestParam Integer productId) {
+        boolean hasFavorited = userFavoriteService.existsByUserIdAndProductId(userId, productId);
+        return Result.success(hasFavorited);
+    }
 }

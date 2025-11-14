@@ -3,18 +3,19 @@ package com.manincorp.trading.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import cn.hutool.core.util.StrUtil;
-import com.manincorp.trading.common.Constants;
 import com.manincorp.trading.common.Result;
 import com.manincorp.trading.common.enums.ResultCodeEnum;
 import com.manincorp.trading.common.enums.RoleEnum;
 import com.manincorp.trading.dto.UserDTO;
 import com.manincorp.trading.entity.User;
 import com.manincorp.trading.service.UserService;
-import com.manincorp.trading.utils.JwtTokenUtil;
+import com.manincorp.trading.utils.MailMsgUtil;
 import jakarta.annotation.Resource;
-import jakarta.servlet.http.Cookie;
-import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Objects;
 
 /**
  * author: Jamie
@@ -38,8 +39,7 @@ public class WebController {
      */
     @PostMapping("/login")
     public Result login(@RequestBody User user,
-                        @RequestParam(required = false, defaultValue = "false") boolean mangerLogin,
-                        HttpServletResponse response) {
+                        @RequestParam(required = false, defaultValue = "false") boolean mangerLogin) {
 
         if (ObjectUtil.isEmpty(user.getUsername()) || ObjectUtil.isEmpty(user.getPassword())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);

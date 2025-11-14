@@ -10,8 +10,10 @@ import com.manincorp.trading.exception.CustomException;
 import com.manincorp.trading.mapper.UserMapper;
 import com.manincorp.trading.service.UserService;
 import com.manincorp.trading.utils.JwtTokenUtil;
+import com.manincorp.trading.utils.MailMsgUtil;
 import com.manincorp.trading.utils.SetDateTimeUtil;
 import jakarta.annotation.Resource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -25,6 +27,8 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
 
     @Resource
     private  UserMapper userMapper;
+    @Autowired
+    private MailMsgUtil mailMsgUtil;
 
     @Override
     public void register(User user) {

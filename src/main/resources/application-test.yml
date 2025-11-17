@@ -3,15 +3,15 @@ server:
 
 #file config
 file:
-  ip: 116.198.205.248
+  ip: 47.238.116.15
   port: 8081
 
 spring:
   #Database config
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: root   #Database username
-    password: N7r$9vQp!X2bLw8@   #Database password
+    username: manincorp-trading   #Database username
+    password: SkwyYyMej4EYfJkz   #Database password
     url: jdbc:mysql://localhost:3306/manincorp-trading?
       useSSL=false&
       useUnicode=true&characterEncoding=utf-8&

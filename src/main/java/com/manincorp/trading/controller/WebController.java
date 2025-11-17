@@ -65,7 +65,7 @@ public class WebController {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
         userService.register(user);
-        return Result.success(user);
+        return Result.success();
     }
 
     /**
@@ -73,11 +73,10 @@ public class WebController {
      */
     @PutMapping("/updatePassword")
     public Result updatePassword(@RequestBody User user) {
-        if (StrUtil.isBlank(user.getUsername()) || StrUtil.isBlank(user.getPassword())
-                || ObjectUtil.isEmpty(user.getRole())) {
+        if (StrUtil.isBlank(user.getUsername()) || StrUtil.isBlank(user.getPassword())) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
-        userService.updateById(user);
-        return Result.success(user);
+        userService.updatePasswordByUsername(user.getUsername(), user.getPassword());
+        return Result.success();
     }
 }

@@ -27,8 +27,6 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
 
     @Resource
     private  UserMapper userMapper;
-    @Autowired
-    private MailMsgUtil mailMsgUtil;
 
     @Override
     public void register(User user) {
@@ -38,6 +36,11 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
     @Override
     public void createAdmin(User user) {
         createUserWithRole(user, RoleEnum.ADMIN);
+    }
+
+    @Override
+    public void updatePasswordByUsername(String username, String password) {
+        userMapper.updatePasswordByUsername(username, password);
     }
 
     @Override

@@ -26,7 +26,8 @@ public enum ResultCodeEnum {
     VERIFICATION_CODE_EXPIRED("5011", "验证码已过期"),
     VERIFICATION_CODE_ERROR("5012", "验证码错误"),
 
-    ;
+    ENUM_NOT_FOUND("5013", "不存在对应的枚举值")
+    ;   ;
 
     public String code;
     public String msg;

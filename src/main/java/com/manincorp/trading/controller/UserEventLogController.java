@@ -3,13 +3,20 @@ package com.manincorp.trading.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.common.Result;
+import com.manincorp.trading.common.enums.ResultCodeEnum;
+import com.manincorp.trading.common.enums.UserEventTargetTypeEnum;
+import com.manincorp.trading.common.enums.UserEventTypeEnum;
 import com.manincorp.trading.dto.UserEventLogPageDTO;
 import com.manincorp.trading.entity.UserEventLog;
 import com.manincorp.trading.service.UserEventLogService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.List;
+import java.util.Map;
 
 /**
  * author: Jamie
@@ -29,6 +36,8 @@ public class UserEventLogController {
      */
     @PostMapping("/track")
     public Result trackEvent(@RequestBody UserEventLog userEventLog) {
+        UserEventTypeEnum.fromCode(userEventLog.getEventType());
+        UserEventTargetTypeEnum.fromCode(userEventLog.getTargetType());
         userEventLogService.save(userEventLog);
         return Result.success(userEventLog);
     }
@@ -60,23 +69,6 @@ public class UserEventLogController {
         return Result.success();
     }
 
-    /**
-     * Query by id
-     */
-    @GetMapping("/selectById/{id}")
-    public Result selectById(@PathVariable Integer id) {
-        UserEventLog userEventLog = userEventLogService.getById(id);
-        return Result.success(userEventLog);
-    }
-
-    /**
-     * Query all
-     */
-    @GetMapping("/selectAll")
-    public Result selectAll() {
-        List<UserEventLog> brandList = userEventLogService.list();
-        return Result.success(brandList);
-    }
 
     /**
      * page

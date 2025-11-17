@@ -18,10 +18,8 @@ public class UserEventLog {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
     private Integer userId;
-    private Integer articleId;
-    private Integer brandId;
-    private Integer productId;
-    private Integer productCategoryId;
+    private String eventType;
+    private String targetType;
+    private Integer targetId;
     private String  createdAt;
-    private Integer articleCategoryId;
 }

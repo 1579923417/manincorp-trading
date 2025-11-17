@@ -6,49 +6,33 @@
 
     <select id="selectPage" resultType="com.manincorp.trading.dto.UserEventLogPageDTO">
         SELECT
-        user_event_log.id,
-        user_event_log.user_id,
-        user_event_log.article_id,
-        user_event_log.article_category_id,
-        user_event_log.brand_id,
-        user_event_log.product_id,
-        user_event_log.product_category_id,
-        user_event_log.created_at,
-
+        user_event_log.id AS id,
+        user_event_log.user_id AS userId,
         user.username AS username,
-        user.nickname AS nickname,
+        user_event_log.event_type AS eventType,
+        user_event_log.target_type AS targetType,
+        user_event_log.target_id AS targetId,
+        user_event_log.created_at AS createdAt,
         article.title AS articleTitle,
-        article_category.name AS articleCategoryName,
-        brand.name AS brandName,
         product.name AS productName,
-        product_category.name AS productCategoryName
-
+        brand.name AS brandName
         FROM user_event_log
-        LEFT JOIN user ON user_event_log.user_id = user.id
-        LEFT JOIN article ON user_event_log.article_id = article.id
-        LEFT JOIN article_category ON user_event_log.article_category_id = article_category.id
-        LEFT JOIN brand ON user_event_log.brand_id = brand.id
-        LEFT JOIN product ON user_event_log.product_id = product.id
-        LEFT JOIN product_category ON user_event_log.product_category_id = product_category.id
-
+        LEFT JOIN user ON user.id = user_event_log.user_id
+        LEFT JOIN article article ON user_event_log.target_type = 'article' AND user_event_log.target_id = article.id
+        LEFT JOIN product product ON user_event_log.target_type = 'product' AND user_event_log.target_id = product.id
+        LEFT JOIN brand brand ON user_event_log.target_type = 'brand' AND user_event_log.target_id = brand.id
         <where>
-            <if test="userEventLog.username != null and userEventLog.username != ''">
-                AND user.username LIKE CONCAT('%', #{userEventLog.username}, '%')
+            <if test="userEventLog.eventType != null and userEventLog.eventType != ''">
+                AND user_event_log.event_type = #{userEventLog.eventType}
             </if>
-            <if test="userEventLog.nickname != null and userEventLog.nickname != ''">
-                AND user.nickname LIKE CONCAT('%', #{userEventLog.nickname}, '%')
+            <if test="userEventLog.targetType != null and userEventLog.targetType != ''">
+                AND user_event_log.target_type = #{userEventLog.targetType}
             </if>
-            <if test="userEventLog.articleTitle != null and userEventLog.articleTitle != ''">
-                AND article.title LIKE CONCAT('%', #{userEventLog.articleTitle}, '%')
+            <if test="userEventLog.startTime != null and userEventLog.startTime != ''">
+                AND user_event_log.created_at &gt;= #{userEventLog.startTime}
             </if>
-            <if test="userEventLog.articleCategoryName != null and userEventLog.articleCategoryName != ''">
-                AND article_category.name LIKE CONCAT('%', #{userEventLog.articleCategoryName}, '%')
-            </if>
-            <if test="userEventLog.brandName != null and userEventLog.brandName != ''">
-                AND brand.name LIKE CONCAT('%', #{userEventLog.brandName}, '%')
-            </if>
-            <if test="userEventLog.productName != null and userEventLog.productName != ''">
-                AND product.name LIKE CONCAT('%', #{userEventLog.productName}, '%')
+            <if test="userEventLog.endTime != null and userEventLog.endTime != ''">
+                AND user_event_log.created_at &lt;= #{userEventLog.endTime}
             </if>
         </where>
         ORDER BY user_event_log.id DESC

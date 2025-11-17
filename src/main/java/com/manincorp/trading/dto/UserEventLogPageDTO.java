@@ -13,17 +13,18 @@ public class UserEventLogPageDTO {
 
     private Integer id;
     private Integer userId;
-    private String username;
-    private String nickname;
-    private Integer articleId;
-    private String articleTitle;
-    private Integer articleCategoryId;
-    private String articleCategoryName;
-    private Integer brandId;
-    private String brandName;
-    private Integer productId;
-    private String productName;
-    private Integer productCategoryId;
-    private String productCategoryName;
+    private String  username;
+
+    private String  eventType;
+    private String  targetType;
+    private Integer targetId;
+
+    private String  articleTitle;
+    private String  brandName;
+    private String  productName;
+
+    private String startTime;
+    private String endTime;
+
     private String  createdAt;
 }

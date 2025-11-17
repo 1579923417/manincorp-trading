@@ -25,9 +25,13 @@ public class RedisConfig {
     @Value("${spring.data.redis.port}")
     private int redisPort;
 
+    @Value("${spring.data.redis.database}")
+    private int redisDatabase;
+
     @Bean
     public RedisConnectionFactory redisConnectionFactory() {
         RedisStandaloneConfiguration config = new RedisStandaloneConfiguration(redisHost, redisPort);
+        config.setDatabase(redisDatabase);
         return new LettuceConnectionFactory(config);
     }
 

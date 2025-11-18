@@ -18,5 +18,6 @@ public class ProductPageDTO {
     private String name;
     private String description;
     private String image;
+    private Integer isFeatured;
     private String createdAt;
 }

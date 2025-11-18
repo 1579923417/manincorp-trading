@@ -3,6 +3,7 @@ package com.manincorp.trading.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.common.Result;
+import com.manincorp.trading.common.enums.ResultCodeEnum;
 import com.manincorp.trading.dto.ProductPageDTO;
 import com.manincorp.trading.dto.ProductFullDTO;
 import com.manincorp.trading.entity.Product;
@@ -49,6 +50,19 @@ public class ProductController {
     @DeleteMapping("/delete/batch")
     public Result deleteBatch(@RequestBody List<Integer> ids) {
         productService.removeByIds(ids);
+        return Result.success();
+    }
+
+    /**
+     * update product featured status
+     */
+    @PutMapping("/featured")
+    public Result updateFeatured(@RequestParam Integer productId,
+                                 @RequestParam Integer isFeatured) {
+        if (productId == null || isFeatured == null) {
+            return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
+        }
+        productService.updateFeatured(productId, isFeatured);
         return Result.success();
     }
 

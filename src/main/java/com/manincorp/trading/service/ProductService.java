@@ -20,4 +20,5 @@ public interface ProductService extends IService<Product> {
 
     ProductFullDTO selectDetailById(Integer id);
 
+    void updateFeatured(Integer productId, int isFeatured);
 }

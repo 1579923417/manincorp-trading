@@ -3,10 +3,12 @@ package com.manincorp.trading.service.serviceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.manincorp.trading.common.enums.ResultCodeEnum;
 import com.manincorp.trading.dto.ProductPageDTO;
 import com.manincorp.trading.dto.ProductFullDTO;
 import com.manincorp.trading.entity.Product;
 import com.manincorp.trading.entity.ProductAttribute;
+import com.manincorp.trading.exception.CustomException;
 import com.manincorp.trading.mapper.ProductMapper;
 import com.manincorp.trading.service.ProductService;
 import com.manincorp.trading.utils.CurrentTimeUtil;
@@ -22,6 +24,12 @@ import java.util.List;
  */
 @Service
 public class ProductImpl extends ServiceImpl<ProductMapper, Product> implements ProductService {
+    private final ProductMapper productMapper;
+
+    public ProductImpl(ProductMapper productMapper) {
+        this.productMapper = productMapper;
+    }
+
     @Override
     public boolean save(Product product) {
         product.setCreatedAt(CurrentTimeUtil.getNowTime());
@@ -41,5 +49,15 @@ public class ProductImpl extends ServiceImpl<ProductMapper, Product> implements 
             dto.setAttributes(attrs);
         }
         return dto;
+    }
+
+    @Override
+    public void updateFeatured(Integer productId, int isFeatured) {
+        Product product = productMapper.selectById(productId);
+        if (product == null) {
+            throw new CustomException(ResultCodeEnum.PRODUCT_NOT_EXIST_ERROR);
+        }
+        product.setIsFeatured(isFeatured);
+        productMapper.updateById(product);
     }
 }

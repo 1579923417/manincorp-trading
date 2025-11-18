@@ -22,5 +22,6 @@ public class Product {
     private String name;
     private String image;
     private String description;
+    private Integer isFeatured;
     private String createdAt;
 }

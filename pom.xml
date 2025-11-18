@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.manincorp</groupId>
     <artifactId>manincorp-trading</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>manincorp-trading</name>
     <description>manincorp-trading</description>
     <url/>
@@ -92,6 +92,7 @@
 
 
     <build>
+        <finalName>manincorp-trading-v${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

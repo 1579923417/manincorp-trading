@@ -17,5 +17,7 @@ public interface UserMapper extends BaseMapper<User> {
      */
     User selectByUsername(String username);
 
-    int updatePasswordByUsername(@Param("username") String username, @Param("password") String password);
+    void updatePasswordByUsername(@Param("username") String username, @Param("password") String password);
+
+    User selectByEmail(String email);
 }

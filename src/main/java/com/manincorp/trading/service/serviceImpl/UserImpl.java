@@ -1,10 +1,12 @@
 package com.manincorp.trading.service.serviceImpl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.manincorp.trading.common.Constants;
 import com.manincorp.trading.common.enums.ResultCodeEnum;
 import com.manincorp.trading.common.enums.RoleEnum;
+import com.manincorp.trading.dto.UserDTO;
 import com.manincorp.trading.entity.User;
 import com.manincorp.trading.exception.CustomException;
 import com.manincorp.trading.mapper.UserMapper;
@@ -14,6 +16,7 @@ import com.manincorp.trading.utils.MailMsgUtil;
 import com.manincorp.trading.utils.CurrentTimeUtil;
 import jakarta.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -27,6 +30,9 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
 
     @Resource
     private  UserMapper userMapper;
+
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
 
     @Override
     public void register(User user) {
@@ -44,19 +50,38 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
     }
 
     @Override
-    public User login(User user) {
-        User dbUser = userMapper.selectByUsername(user.getUsername());
-        if (ObjectUtil.isNull(dbUser)) {
-            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
-        }
-        if (!user.getPassword().equals(dbUser.getPassword())) {
-            throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
-        }
+    public UserDTO loginWithEmail(String email, String code, boolean managerLogin) {
+        String redisCode = redisTemplate.opsForValue().get(email);
+        if (redisCode == null) throw new CustomException(ResultCodeEnum.VERIFICATION_CODE_EXPIRED);
+        if (!redisCode.equals(code)) throw new CustomException(ResultCodeEnum.VERIFICATION_CODE_ERROR);
 
-        String tokenData = dbUser.getId() + "-" + dbUser.getUsername() + "-" + dbUser.getRole();
-        String token = JwtTokenUtil.createToken(tokenData, dbUser.getPassword());
+        User dbUser = userMapper.selectByEmail(email);
+        if (dbUser == null) throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        if (managerLogin && !RoleEnum.ADMIN.name().equals(dbUser.getRole()))
+            throw new CustomException(ResultCodeEnum.USER_NO_PERMISSION_ERROR);
+
+        String token = JwtTokenUtil.createToken(dbUser.getId() + "-" + dbUser.getUsername() + "-" + dbUser.getRole(), dbUser.getPassword());
         dbUser.setToken(token);
-        return dbUser;
+
+        UserDTO dto = new UserDTO();
+        BeanUtil.copyProperties(dbUser, dto);
+        return dto;
+    }
+
+    @Override
+    public UserDTO loginWithPassword(String username, String password, boolean managerLogin) {
+        User dbUser = userMapper.selectByUsername(username);
+        if (ObjectUtil.isNull(dbUser)) throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        if (!password.equals(dbUser.getPassword())) throw new CustomException(ResultCodeEnum.USER_ACCOUNT_ERROR);
+        if (managerLogin && !RoleEnum.ADMIN.name().equals(dbUser.getRole()))
+            throw new CustomException(ResultCodeEnum.USER_NO_PERMISSION_ERROR);
+
+        String token = JwtTokenUtil.createToken(dbUser.getId() + "-" + dbUser.getUsername() + "-" + dbUser.getRole(), dbUser.getPassword());
+        dbUser.setToken(token);
+
+        UserDTO dto = new UserDTO();
+        BeanUtil.copyProperties(dbUser, dto);
+        return dto;
     }
 
     private void createUserWithRole(User user, RoleEnum role) {

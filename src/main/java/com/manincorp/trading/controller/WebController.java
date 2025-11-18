@@ -35,26 +35,32 @@ public class WebController {
     }
 
     /**
-     * login
+     * password login
      */
-    @PostMapping("/login")
-    public Result login(@RequestBody User user,
-                        @RequestParam(required = false, defaultValue = "false") boolean mangerLogin) {
-
-        if (ObjectUtil.isEmpty(user.getUsername()) || ObjectUtil.isEmpty(user.getPassword())) {
+    @PostMapping("/login/password")
+    public Result loginWithPassword(@RequestParam String username,
+                                    @RequestParam String password,
+                                    @RequestParam(defaultValue = "false") boolean managerLogin) {
+        if (ObjectUtil.isEmpty(username) || ObjectUtil.isEmpty(password)) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
-
-        User dbUser = userService.login(user);
-        if (mangerLogin && !RoleEnum.ADMIN.name().equals(dbUser.getRole())) {
-            return Result.error(ResultCodeEnum.USER_NO_PERMISSION_ERROR);
-        }
-        //Copy user properties to DTO to avoid exposing sensitive information
-        UserDTO dto = new UserDTO();
-        BeanUtil.copyProperties(dbUser, dto);
-
+        UserDTO dto = userService.loginWithPassword(username, password, managerLogin);
         return Result.success(dto);
     }
+
+   /**
+     * Email login
+     */
+   @PostMapping("/login/email")
+   public Result emailLogin(@RequestParam String email,
+                            @RequestParam String code,
+                            @RequestParam(required = false, defaultValue = "false") boolean managerLogin) {
+       if (ObjectUtil.isEmpty(email) || ObjectUtil.isEmpty(code)) {
+           return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
+       }
+       UserDTO dto = userService.loginWithEmail(email, code, managerLogin);
+       return Result.success(dto);
+   }
 
     /**
      * register

@@ -1,6 +1,7 @@
 package com.manincorp.trading.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.manincorp.trading.dto.UserDTO;
 import com.manincorp.trading.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +15,9 @@ public interface UserService extends IService<User> {
 
     void register(User user);
 
-    User login(User user);
+    UserDTO loginWithPassword(String username, String password, boolean managerLogin);
+
+    UserDTO loginWithEmail(String email, String code, boolean managerLogin);
 
     void createAdmin(User user);
 

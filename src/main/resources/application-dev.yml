@@ -35,6 +35,7 @@ spring:
     protocol: smtps
     username: 3299127392@qq.com
     password: diimtauudkahdade
+    port: 465
     host: smtp.qq.com
     default-encoding: UTF-8
     properties:
@@ -51,9 +52,16 @@ spring:
   #Redis config
   data:
     redis:
-      host: localhost
-      port: 6379
       database: 1
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
 
 # MyBatis config
 mybatis-plus:

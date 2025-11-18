@@ -22,4 +22,6 @@ public interface UserService extends IService<User> {
     void createAdmin(User user);
 
     void updatePasswordByUsername(String username, String password);
+
+    void updatePasswordByEmail(String email, String code, String newPassword);
 }

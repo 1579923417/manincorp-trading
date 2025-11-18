@@ -50,6 +50,24 @@ public class UserImpl extends ServiceImpl<UserMapper, User> implements UserServi
     }
 
     @Override
+    public void updatePasswordByEmail(String email, String code, String newPassword) {
+        String redisCode = redisTemplate.opsForValue().get(email);
+        if (redisCode == null) {
+            throw new CustomException(ResultCodeEnum.VERIFICATION_CODE_EXPIRED);
+        }
+        if (!redisCode.equals(code)) {
+            throw new CustomException(ResultCodeEnum.VERIFICATION_CODE_ERROR);
+        }
+        User user = userMapper.selectByEmail(email);
+        if (user == null) {
+            throw new CustomException(ResultCodeEnum.USER_NOT_EXIST_ERROR);
+        }
+        userMapper.updatePasswordByUsername(user.getUsername(), newPassword);
+        redisTemplate.delete(email);
+    }
+
+
+    @Override
     public UserDTO loginWithEmail(String email, String code, boolean managerLogin) {
         String redisCode = redisTemplate.opsForValue().get(email);
         if (redisCode == null) throw new CustomException(ResultCodeEnum.VERIFICATION_CODE_EXPIRED);

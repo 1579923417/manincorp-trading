@@ -75,14 +75,29 @@ public class WebController {
     }
 
     /**
-     * updatePassword
+     * Update password by username
      */
     @PutMapping("/updatePassword")
-    public Result updatePassword(@RequestBody User user) {
-        if (StrUtil.isBlank(user.getUsername()) || StrUtil.isBlank(user.getPassword())) {
+    public Result updatePassword(@RequestParam String username,
+                                 @RequestParam String newPassword) {
+        if (StrUtil.isBlank(username) || StrUtil.isBlank(newPassword)) {
             return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
         }
-        userService.updatePasswordByUsername(user.getUsername(), user.getPassword());
+        userService.updatePasswordByUsername(username, newPassword);
+        return Result.success();
+    }
+
+    /**
+     * Update password by email verification code
+     */
+    @PutMapping("/updatePassword/email")
+    public Result updatePasswordByEmail(@RequestParam String email,
+                                        @RequestParam String code,
+                                        @RequestParam String newPassword) {
+        if (StrUtil.isBlank(email) || StrUtil.isBlank(code) || StrUtil.isBlank(newPassword)) {
+            return Result.error(ResultCodeEnum.PARAM_LOST_ERROR);
+        }
+        userService.updatePasswordByEmail(email, code, newPassword);
         return Result.success();
     }
 }

@@ -2,6 +2,7 @@ package com.manincorp.trading.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
 /**
@@ -11,6 +12,7 @@ import lombok.Data;
  * Description:
  */
 @Data
+@TableName("product_attribute")
 public class ProductAttribute {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;

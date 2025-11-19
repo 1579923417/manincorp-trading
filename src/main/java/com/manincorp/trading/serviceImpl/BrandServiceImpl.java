@@ -1,4 +1,4 @@
-package com.manincorp.trading.service.serviceImpl;
+package com.manincorp.trading.serviceImpl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.manincorp.trading.entity.Brand;

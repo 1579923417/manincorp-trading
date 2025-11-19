@@ -1,4 +1,4 @@
-package com.manincorp.trading.service.serviceImpl;
+package com.manincorp.trading.serviceImpl;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;

@@ -1,4 +1,4 @@
-package com.manincorp.trading.service.serviceImpl;
+package com.manincorp.trading.serviceImpl;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ObjectUtil;

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.manincorp.trading.mapper.SystemConfigMapper">
+
+    <!-- 查询所有分组 -->
+    <select id="selectAllGroupNames" resultType="com.manincorp.trading.dto.SystemConfigGroupDTO">
+        SELECT DISTINCT en_group_name, zh_group_name
+        FROM system_config
+    </select>
+
+    <select id="selectConfigByGroup" resultType="com.manincorp.trading.entity.SystemConfig" parameterType="com.manincorp.trading.dto.SystemConfigGroupDTO">
+        SELECT *
+        FROM system_config
+        WHERE (en_group_name = #{enGroupName} OR zh_group_name = #{zhGroupName})
+        ORDER BY id
+    </select>
+
+    <select id="selectConfigValue" resultType="java.lang.String">
+        SELECT config_value
+        FROM system_config
+        WHERE en_group_name = #{enGroupName}
+          AND config_key = #{configKey}
+            LIMIT 1
+    </select>
+
+</mapper>

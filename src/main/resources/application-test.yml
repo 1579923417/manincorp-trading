@@ -25,29 +25,6 @@ spring:
       max-file-size: 100MB     #Maximum size per uploaded file
       max-request-size: 100MB  #Maximum size for a single request
 
-  #mail config
-  mail:
-#    username: JamieXu0132@outlook.com
-#    password: mkreoutmhyhbsiud
-#    host: smtp-mail.outlook.com
-#    port: 587
-#    protocol: smtp
-    protocol: smtps
-    username: 3299127392@qq.com
-    password: diimtauudkahdade
-    port: 465
-    host: smtp.qq.com
-    default-encoding: UTF-8
-    properties:
-      mail:
-        smtp:
-          socketFactoryClass: javax.net.ssl.SSLSocketFactory
-          debug: true
-#          auth: true
-#          starttls.enable: true
-#          starttls.required: true
-#          debug: true
-
   #Redis config
   data:
     redis:

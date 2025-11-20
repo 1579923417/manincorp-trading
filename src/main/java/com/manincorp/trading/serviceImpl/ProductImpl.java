@@ -34,7 +34,9 @@ public class ProductImpl extends ServiceImpl<ProductMapper, Product> implements 
     @Override
     public boolean save(Product product) {
         product.setCreatedAt(CurrentTimeUtil.getNowTime());
-        product.setLang(LanguageEnum.ZH_HANS.getCode());
+        if (product.getLang() == null) {
+            product.setLang(LanguageEnum.ZH_HANS.getCode());
+        }
         return super.save(product);
     }
 

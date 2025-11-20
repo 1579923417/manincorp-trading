@@ -24,7 +24,9 @@ public class ProductAttributeImpl extends ServiceImpl<ProductAttributeMapper, Pr
     @Override
     public boolean save(ProductAttribute productAttribute) {
         productAttribute.setCreatedAt(CurrentTimeUtil.getNowTime());
-        productAttribute.setLang(LanguageEnum.ZH_HANS.getCode());
+        if (productAttribute.getLang() == null) {
+            productAttribute.setLang(LanguageEnum.ZH_HANS.getCode());
+        }
         return super.save(productAttribute);
     }
 

@@ -4,20 +4,42 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.manincorp.trading.mapper.AdvertisementMapper">
 
+    <sql id="AdvertisementColumns">
+        advertisement.id,
+        advertisement.title,
+        advertisement.content,
+        advertisement.position,
+        advertisement.image_url,
+        advertisement.link_url,
+        advertisement.lang,
+        advertisement.created_at
+    </sql>
+
     <select id="selectByPosition" resultType="com.manincorp.trading.entity.Advertisement">
         SELECT
-            advertisement.id,
-            advertisement.content,
-            advertisement.position,
-            advertisement.image_url,
-            advertisement.link_url,
-            advertisement.created_at
+        <include refid="AdvertisementColumns"/>
         FROM advertisement
         <where>
-            <if test="position != null and position !=''">
-                AND position LIKE CONCAT ('%', #{position}, '%')
+            <if test="position != null and position != ''">
+                AND advertisement.position LIKE CONCAT('%', #{position}, '%')
+            </if>
+            <if test="lang != null and lang != ''">
+                AND advertisement.lang = #{lang}
             </if>
         </where>
         ORDER BY advertisement.id DESC
     </select>
+
+    <select id="selectPage" resultType="com.manincorp.trading.entity.Advertisement">
+        SELECT
+        <include refid="AdvertisementColumns"/>
+        FROM advertisement
+        <where>
+            <if test="advertisement.lang != null and advertisement.lang != ''">
+                AND advertisement.lang = #{advertisement.lang}
+            </if>
+        </where>
+        ORDER BY advertisement.id DESC
+    </select>
+
 </mapper>

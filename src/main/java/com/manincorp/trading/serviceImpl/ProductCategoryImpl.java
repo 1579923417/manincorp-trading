@@ -24,7 +24,9 @@ public class ProductCategoryImpl extends ServiceImpl<ProductCategoryMapper, Prod
     @Override
     public boolean save(ProductCategory productCategory) {
         productCategory.setCreatedAt(CurrentTimeUtil.getNowTime());
-        productCategory.setLang(LanguageEnum.ZH_HANS.getCode());
+        if (productCategory.getLang() == null) {
+            productCategory.setLang(LanguageEnum.ZH_HANS.getCode());
+        }
         return super.save(productCategory);
     }
 

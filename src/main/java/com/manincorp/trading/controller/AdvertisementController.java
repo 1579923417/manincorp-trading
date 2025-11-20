@@ -1,9 +1,11 @@
 package com.manincorp.trading.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.common.Result;
 import com.manincorp.trading.entity.Advertisement;
+import com.manincorp.trading.entity.ArticleCategory;
 import com.manincorp.trading.service.AdvertisementService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;
@@ -82,18 +84,20 @@ public class AdvertisementController {
      */
     @GetMapping("/selectPage")
     public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
-        QueryWrapper<Advertisement> wrapper = new QueryWrapper<>();
-        Page<Advertisement> page = advertisementService.page(new Page<>(pageNum, pageSize), wrapper);
-        return Result.success(page);
+                             @RequestParam(defaultValue = "10") Integer pageSize,
+                             Advertisement advertisement) {
+        Page<Advertisement> page = new Page<>(pageNum, pageSize);
+        IPage<Advertisement> list = advertisementService.selectPage(page, advertisement);
+        return Result.success(list);
     }
 
     /**
      * query by position
      */
     @GetMapping("/selectByPosition")
-    public Result selectByPosition(@RequestParam(required = false) String position) {
-        List<Advertisement> list = advertisementService.selectByPosition(position);
+    public Result selectByPosition(@RequestParam(required = false) String position,
+                                   @RequestParam(required = false) String lang) {
+        List<Advertisement> list = advertisementService.selectByPosition(position, lang);
         return Result.success(list);
     }
 }

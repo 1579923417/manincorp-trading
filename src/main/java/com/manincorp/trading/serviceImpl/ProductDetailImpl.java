@@ -22,7 +22,9 @@ public class ProductDetailImpl extends ServiceImpl<ProductDetailMapper, ProductD
     @Override
     public boolean save(ProductDetail productDetail) {
         productDetail.setCreatedAt(CurrentTimeUtil.getNowTime());
-        productDetail.setLang(LanguageEnum.ZH_HANS.getCode());
+        if (productDetail.getLang() == null) {
+            productDetail.setLang(LanguageEnum.ZH_HANS.getCode());
+        }
         return super.save(productDetail);
     }
 

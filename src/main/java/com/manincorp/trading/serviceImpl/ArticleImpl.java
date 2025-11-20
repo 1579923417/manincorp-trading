@@ -27,7 +27,9 @@ public class ArticleImpl extends ServiceImpl<ArticleMapper, Article> implements 
             article.setPublishStatus(0);
         }
         article.setViewCount(0);
-        article.setLang(LanguageEnum.ZH_HANS.getCode());
+        if (article.getLang() == null) {
+            article.setLang(LanguageEnum.ZH_HANS.getCode());
+        }
         return super.save(article);
     }
 

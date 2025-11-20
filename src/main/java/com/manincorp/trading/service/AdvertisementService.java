@@ -1,7 +1,10 @@
 package com.manincorp.trading.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.manincorp.trading.entity.Advertisement;
+import com.manincorp.trading.entity.ArticleCategory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,5 +16,7 @@ import java.util.List;
  * Description:
  */
 public interface AdvertisementService extends IService<Advertisement> {
-    List<Advertisement> selectByPosition(String position);
+    List<Advertisement> selectByPosition(String position, String lang);
+
+    IPage<Advertisement> selectPage(Page<Advertisement> page, Advertisement advertisement);
 }

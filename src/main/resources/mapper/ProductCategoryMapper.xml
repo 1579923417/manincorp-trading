@@ -25,7 +25,7 @@
                 AND product_category.brand_id = #{productCategory.brandId}
             </if>
             <if test="productCategory.lang != null">
-                AND productCategory.lang = #{productCategory.lang}
+                AND product_category.lang = #{productCategory.lang}
             </if>
         </where>
         ORDER BY product_category.id DESC

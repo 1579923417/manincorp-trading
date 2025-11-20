@@ -23,7 +23,9 @@ public class ArticleCategoryImpl extends ServiceImpl<ArticleCategoryMapper, Arti
     @Override
     public boolean save(ArticleCategory articleCategory) {
         articleCategory.setCreatedAt(CurrentTimeUtil.getNowTime());
-        articleCategory.setLang(LanguageEnum.ZH_HANS.getCode());
+        if (articleCategory.getLang() == null) {
+            articleCategory.setLang(LanguageEnum.ZH_HANS.getCode());
+        }
         return super.save(articleCategory);
     }
 

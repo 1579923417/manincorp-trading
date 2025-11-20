@@ -19,7 +19,9 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     @Override
     public boolean save(Brand brand) {
         brand.setCreatedAt(CurrentTimeUtil.getNowTime());
-        brand.setLang(LanguageEnum.ZH_HANS.getCode());
+        if (brand.getLang() == null) {
+            brand.setLang(LanguageEnum.ZH_HANS.getCode());
+        }
         return super.save(brand);
     }
 }

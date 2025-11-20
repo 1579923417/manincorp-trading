@@ -22,5 +22,6 @@ public class Advertisement {
     private String position;
     private String imageUrl;
     private String linkUrl;
+    private String lang;
     private String createdAt;
 }

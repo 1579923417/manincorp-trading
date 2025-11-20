@@ -15,5 +15,6 @@ public class ProductAttributePageDTO {
     private String productName;
     private String name;
     private String value;
+    private String lang;
     private String createdAt;
 }

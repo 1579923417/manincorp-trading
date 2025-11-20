@@ -11,6 +11,7 @@
             product_attribute.product_id,
             product_attribute.name,
             product_attribute.value,
+            product_attribute.lang,
             product_attribute.created_at,
             product.name AS productName
         FROM product_attribute
@@ -23,6 +24,9 @@
         <where>
             <if test="productAttribute != null and productAttribute.name != null and productAttribute.name != ''">
                 AND product_attribute.name LIKE CONCAT('%', #{productAttribute.name}, '%')
+            </if>
+            <if test="product_attribute.lang != null">
+                AND product_attribute.lang = #{product_attribute.lang}
             </if>
         </where>
         ORDER BY product_attribute.id DESC

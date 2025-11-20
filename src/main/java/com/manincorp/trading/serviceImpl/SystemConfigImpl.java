@@ -37,10 +37,11 @@ public class SystemConfigImpl extends ServiceImpl<SystemConfigMapper, SystemConf
     }
 
     @Override
-    public List<SystemConfig> getConfigsByGroup(String enGroupName, String zhGroupName) {
+    public List<SystemConfig> getConfigsByGroup(String enGroupName, String zhGroupName, String lang) {
         SystemConfigGroupDTO groupDTO = new SystemConfigGroupDTO();
         groupDTO.setEnGroupName(enGroupName);
         groupDTO.setZhGroupName(zhGroupName);
+        groupDTO.setLang(lang);
         return systemConfigMapper.selectConfigByGroup(groupDTO);
     }
 

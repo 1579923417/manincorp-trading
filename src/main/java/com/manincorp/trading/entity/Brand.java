@@ -20,5 +20,6 @@ public class Brand {
     private String name;
     private String logo;
     private String description;
+    private String lang;
     private String createdAt;
 }

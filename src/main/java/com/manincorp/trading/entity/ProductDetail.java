@@ -19,5 +19,6 @@ public class ProductDetail {
     private String productId;
     private String introduction;
     private String content;
+    private String lang;
     private String createdAt;
 }

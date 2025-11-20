@@ -1,6 +1,10 @@
 package com.manincorp.trading.service;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.manincorp.trading.dto.ArticlePageDTO;
+import com.manincorp.trading.entity.Article;
 import com.manincorp.trading.entity.ArticleCategory;
 import org.springframework.stereotype.Service;
 
@@ -11,4 +15,6 @@ import org.springframework.stereotype.Service;
  * Description:
  */
 public interface ArticleCategoryService extends IService<ArticleCategory> {
+
+    IPage<ArticleCategory> selectPage(Page<ArticleCategory> page, ArticleCategory articleCategory);
 }

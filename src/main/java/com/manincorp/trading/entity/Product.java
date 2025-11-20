@@ -23,5 +23,6 @@ public class Product {
     private String image;
     private String description;
     private Integer isFeatured;
+    private String lang;
     private String createdAt;
 }

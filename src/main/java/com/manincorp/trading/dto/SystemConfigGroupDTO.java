@@ -12,4 +12,5 @@ import lombok.Data;
 public class SystemConfigGroupDTO {
     private String enGroupName;
     private String zhGroupName;
+    private String lang;
 }

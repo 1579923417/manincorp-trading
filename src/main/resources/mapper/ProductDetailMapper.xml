@@ -11,6 +11,7 @@
             product_detail.product_id,
             product_detail.introduction,
             product_detail.content,
+            product_detail.lang,
             product_detail.created_at,
             product.name AS productName
         FROM product_detail
@@ -23,6 +24,9 @@
         <where>
             <if test="productId != null">
                 AND product_detail.product_id = #{productId}
+            </if>
+            <if test="product_detail.lang != null">
+                AND product_detail.lang = #{product_detail.lang}
             </if>
         </where>
         ORDER BY product_detail.id DESC

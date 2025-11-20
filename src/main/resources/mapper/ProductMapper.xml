@@ -13,6 +13,7 @@
             product.description,
             product.image,
             product.is_featured,
+            product.lang,
             product.created_at,
             brand.name AS brandName,
             product_category.name AS categoryName
@@ -31,6 +32,9 @@
             </if>
             <if test="product.isFeatured != null">
                 AND product.is_featured = #{product.isFeatured}
+            </if>
+            <if test="product.lang != null">
+                AND product.lang = #{product.lang}
             </if>
         </where>
         ORDER BY product.id DESC

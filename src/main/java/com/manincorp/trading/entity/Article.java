@@ -23,6 +23,7 @@ public class Article {
     private String content;
     private Integer publishStatus;
     private Integer viewCount;
+    private String lang;
     private String createdAt;
 }
 

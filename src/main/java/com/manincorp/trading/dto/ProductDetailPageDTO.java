@@ -15,5 +15,6 @@ public class ProductDetailPageDTO {
     private String productName;
     private String introduction;
     private String content;
+    private String lang;
     private String createdAt;
 }

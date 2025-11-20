@@ -4,16 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.manincorp.trading.mapper.SystemConfigMapper">
 
-    <!-- 查询所有分组 -->
     <select id="selectAllGroupNames" resultType="com.manincorp.trading.dto.SystemConfigGroupDTO">
         SELECT DISTINCT en_group_name, zh_group_name
         FROM system_config
     </select>
 
-    <select id="selectConfigByGroup" resultType="com.manincorp.trading.entity.SystemConfig" parameterType="com.manincorp.trading.dto.SystemConfigGroupDTO">
+    <select id="selectConfigByGroup" resultType="com.manincorp.trading.entity.SystemConfig"
+            parameterType="com.manincorp.trading.dto.SystemConfigGroupDTO">
         SELECT *
         FROM system_config
-        WHERE (en_group_name = #{enGroupName} OR zh_group_name = #{zhGroupName})
+        <where>
+            <if test="enGroupName != null and enGroupName != ''">
+                AND en_group_name = #{enGroupName}
+            </if>
+            <if test="zhGroupName != null and zhGroupName != ''">
+                AND zh_group_name = #{zhGroupName}
+            </if>
+            <if test="lang != null and lang != ''">
+                AND lang = #{lang}
+            </if>
+        </where>
         ORDER BY id
     </select>
 

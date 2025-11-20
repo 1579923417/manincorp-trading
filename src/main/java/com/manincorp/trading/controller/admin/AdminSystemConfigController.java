@@ -40,8 +40,9 @@ public class AdminSystemConfigController {
      */
     @GetMapping("/groups/items")
     public Result getConfigsByGroup(@RequestParam(required = false) String enGroupName,
-                                    @RequestParam(required = false) String zhGroupName) {
-        List<SystemConfig> items = systemConfigService.getConfigsByGroup(enGroupName, zhGroupName);
+                                    @RequestParam(required = false) String zhGroupName,
+                                    @RequestParam(required = false) String lang) {
+        List<SystemConfig> items = systemConfigService.getConfigsByGroup(enGroupName, zhGroupName, lang);
         return Result.success(items);
     }
 

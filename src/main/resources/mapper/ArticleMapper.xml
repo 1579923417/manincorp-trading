@@ -12,6 +12,7 @@
             article.category_id,
             article.content,
             article.publish_status,
+            article.lang,
             article.view_count,
             article.created_at,
             article_category.name AS articleCategoryName,
@@ -28,6 +29,9 @@
             </if>
             <if test="article.categoryId != null and article.categoryId != ''">
                 AND article.category_id = #{article.categoryId}
+            </if>
+            <if test="article.lang != null and article.lang != ''">
+                AND article.lang = #{article.lang}
             </if>
         </where>
         ORDER BY article.id DESC

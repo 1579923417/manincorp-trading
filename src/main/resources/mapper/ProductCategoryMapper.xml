@@ -10,6 +10,7 @@
             product_category.id,
             product_category.brand_id,
             product_category.name,
+            product_category.lang,
             product_category.created_at,
             brand.name AS brandName
         FROM product_category
@@ -22,6 +23,9 @@
         <where>
             <if test="productCategory.brandId != null">
                 AND product_category.brand_id = #{productCategory.brandId}
+            </if>
+            <if test="productCategory.lang != null">
+                AND productCategory.lang = #{productCategory.lang}
             </if>
         </where>
         ORDER BY product_category.id DESC

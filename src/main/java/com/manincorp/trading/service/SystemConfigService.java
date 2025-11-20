@@ -19,7 +19,7 @@ public interface SystemConfigService extends IService<SystemConfig> {
 
     List<String> getAllGroupNames();
 
-    List<SystemConfig> getConfigsByGroup(String enGroupName, String zhGroupName);
+    List<SystemConfig> getConfigsByGroup(String enGroupName, String zhGroupName, String lang);
 
     String getConfigValue(String enGroupName, String configKey);
 }

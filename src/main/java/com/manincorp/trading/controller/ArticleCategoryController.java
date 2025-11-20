@@ -82,7 +82,8 @@ public class ArticleCategoryController {
      */
     @GetMapping("/selectPage")
     public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
-                             @RequestParam(defaultValue = "10") Integer pageSize) {
+                             @RequestParam(defaultValue = "10") Integer pageSize,
+                             ArticleCategory articleCategory) {
         QueryWrapper<ArticleCategory> wrapper = new QueryWrapper<>();
         Page<ArticleCategory> page = articleCategoryService.page(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(page);

@@ -24,15 +24,43 @@ public class WebConfig implements WebMvcConfigurer {
                 .excludePathPatterns("/")
                 .excludePathPatterns("/login/**")
                 .excludePathPatterns("/register")
-                .excludePathPatterns("/advertisement/**")
-                .excludePathPatterns("/articleCategory/**")
-                .excludePathPatterns("/article/**")
-                .excludePathPatterns("/brand/**")
-                .excludePathPatterns("/product/**")
-                .excludePathPatterns("/productCategory/**")
-                .excludePathPatterns("/productAttribute/**")
-                .excludePathPatterns("/productDetail/**")
                 .excludePathPatterns("/email/**")
-                .excludePathPatterns("/files/**");
+                .excludePathPatterns("/files/**")
+
+                .excludePathPatterns("/advertisement/selectByPosition")
+                .excludePathPatterns("/advertisement/selectAll")
+                .excludePathPatterns("/advertisement/selectPage")
+
+                .excludePathPatterns("/articleCategory/selectPage")
+                .excludePathPatterns("/articleCategory/selectAll")
+
+                .excludePathPatterns("/article/selectPage")
+                .excludePathPatterns("/article/selectAll")
+                .excludePathPatterns("/article/selectById/{id}")
+
+                .excludePathPatterns("/brand/selectPage")
+                .excludePathPatterns("/brand/selectAll")
+                .excludePathPatterns("/brand/selectById/{id}")
+
+                .excludePathPatterns("/product/selectPage")
+                .excludePathPatterns("/product/selectAll")
+                .excludePathPatterns("/product/selectById/{id}")
+
+                .excludePathPatterns("/productCategory/selectPage")
+                .excludePathPatterns("/productCategory/selectAll")
+                .excludePathPatterns("/productCategory/selectById/{id}")
+                .excludePathPatterns("/productCategory/selectByBrandId/{id}")
+
+                .excludePathPatterns("/productAttribute/selectPage")
+                .excludePathPatterns("/productAttribute/selectAll")
+                .excludePathPatterns("/productAttribute/selectById/{id}")
+                .excludePathPatterns("/productAttribute/selectByProductId/{id}")
+
+                .excludePathPatterns("/productDetail/selectPage")
+                .excludePathPatterns("/productDetail/selectAll")
+                .excludePathPatterns("/productDetail/selectById/{id}")
+                .excludePathPatterns("/productDetail/selectByProductId/{id}")
+
+                .excludePathPatterns("/web/systemConfig/**");
     }
 }

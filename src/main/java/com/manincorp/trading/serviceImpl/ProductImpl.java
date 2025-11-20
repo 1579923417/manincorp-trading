@@ -3,6 +3,7 @@ package com.manincorp.trading.serviceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.manincorp.trading.common.enums.LanguageEnum;
 import com.manincorp.trading.common.enums.ResultCodeEnum;
 import com.manincorp.trading.dto.ProductPageDTO;
 import com.manincorp.trading.dto.ProductFullDTO;
@@ -33,6 +34,7 @@ public class ProductImpl extends ServiceImpl<ProductMapper, Product> implements 
     @Override
     public boolean save(Product product) {
         product.setCreatedAt(CurrentTimeUtil.getNowTime());
+        product.setLang(LanguageEnum.ZH_HANS.getCode());
         return super.save(product);
     }
 

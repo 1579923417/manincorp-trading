@@ -3,6 +3,7 @@ package com.manincorp.trading.serviceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.manincorp.trading.common.enums.LanguageEnum;
 import com.manincorp.trading.dto.ArticlePageDTO;
 import com.manincorp.trading.entity.Article;
 import com.manincorp.trading.mapper.ArticleMapper;
@@ -26,6 +27,7 @@ public class ArticleImpl extends ServiceImpl<ArticleMapper, Article> implements 
             article.setPublishStatus(0);
         }
         article.setViewCount(0);
+        article.setLang(LanguageEnum.ZH_HANS.getCode());
         return super.save(article);
     }
 

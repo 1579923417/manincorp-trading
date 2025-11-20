@@ -1,6 +1,7 @@
 package com.manincorp.trading.serviceImpl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.manincorp.trading.common.enums.LanguageEnum;
 import com.manincorp.trading.entity.Brand;
 import com.manincorp.trading.mapper.BrandMapper;
 import com.manincorp.trading.service.BrandService;
@@ -18,6 +19,7 @@ public class BrandServiceImpl extends ServiceImpl<BrandMapper, Brand> implements
     @Override
     public boolean save(Brand brand) {
         brand.setCreatedAt(CurrentTimeUtil.getNowTime());
+        brand.setLang(LanguageEnum.ZH_HANS.getCode());
         return super.save(brand);
     }
 }

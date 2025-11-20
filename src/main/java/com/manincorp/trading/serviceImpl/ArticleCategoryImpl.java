@@ -3,6 +3,7 @@ package com.manincorp.trading.serviceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.manincorp.trading.common.enums.LanguageEnum;
 import com.manincorp.trading.dto.ArticlePageDTO;
 import com.manincorp.trading.entity.Article;
 import com.manincorp.trading.entity.ArticleCategory;
@@ -22,6 +23,7 @@ public class ArticleCategoryImpl extends ServiceImpl<ArticleCategoryMapper, Arti
     @Override
     public boolean save(ArticleCategory articleCategory) {
         articleCategory.setCreatedAt(CurrentTimeUtil.getNowTime());
+        articleCategory.setLang(LanguageEnum.ZH_HANS.getCode());
         return super.save(articleCategory);
     }
 

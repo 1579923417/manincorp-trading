@@ -12,11 +12,11 @@
         article_category.created_at
         FROM article_category
         <where>
-            <if test="name != null and name != ''">
-                AND article_category.name LIKE CONCAT('%', #{name}, '%')
+            <if test="article_category.name != null and article_category.name != ''">
+                AND article_category.name LIKE CONCAT('%', #{article_category.name}, '%')
             </if>
-            <if test="lang != null and lang != ''">
-                AND article_category.lang = #{lang}
+            <if test="article_category.lang != null and article_category.lang != ''">
+                AND article_category.lang = #{article_category.lang}
             </if>
         </where>
         ORDER BY article_category.id DESC

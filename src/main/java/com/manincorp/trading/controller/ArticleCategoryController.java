@@ -1,8 +1,10 @@
 package com.manincorp.trading.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.common.Result;
+import com.manincorp.trading.dto.ArticlePageDTO;
 import com.manincorp.trading.entity.ArticleCategory;
 import com.manincorp.trading.service.ArticleCategoryService;
 import jakarta.annotation.Resource;
@@ -84,8 +86,8 @@ public class ArticleCategoryController {
     public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize,
                              ArticleCategory articleCategory) {
-        QueryWrapper<ArticleCategory> wrapper = new QueryWrapper<>();
-        Page<ArticleCategory> page = articleCategoryService.page(new Page<>(pageNum, pageSize), wrapper);
-        return Result.success(page);
+        Page<ArticleCategory> page = new Page<>(pageNum, pageSize);
+        IPage<ArticleCategory> list = articleCategoryService.selectPage(page, articleCategory);
+        return Result.success(list);
     }
 }

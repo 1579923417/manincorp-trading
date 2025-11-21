@@ -1,0 +1,48 @@
+server:
+  port: 8081
+
+#file config
+file:
+  ip: 8.218.55.127
+  port: 8081
+
+spring:
+  #Database config
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: manincorp   #Database username
+    password: SkwyYyMej4EYfJkz   #Database password
+    url: jdbc:mysql://localhost:3306/manincorp-trading?
+      useSSL=false&
+      useUnicode=true&characterEncoding=utf-8&
+      allowMultiQueries=true&useSSL=false&
+      serverTimezone=GMT%2b8&
+      allowPublicKeyRetrieval=true
+
+  # File upload config
+  servlet:
+    multipart:
+      max-file-size: 100MB     #Maximum size per uploaded file
+      max-request-size: 100MB  #Maximum size for a single request
+
+  #Redis config
+  data:
+    redis:
+      database: 1
+      host: 127.0.0.1
+      port: 6379
+      password: 123456
+      lettuce:
+        pool:
+          max-active: 8
+          max-idle: 8
+          min-idle: 0
+          max-wait: -1ms
+
+# MyBatis config
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.manincorp.trading.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #Enable SQL logging
+    map-underscore-to-camel-case: true

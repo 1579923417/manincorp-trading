@@ -3,10 +3,13 @@ package com.manincorp.trading.service;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.manincorp.trading.dto.ProductFavoriteCountDTO;
 import com.manincorp.trading.dto.UserFavoritePageDTO;
 import com.manincorp.trading.entity.ProductCategory;
 import com.manincorp.trading.entity.UserFavorite;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * author: Jamie
@@ -20,4 +23,6 @@ public interface UserFavoriteService extends IService<UserFavorite> {
     boolean existsByUserIdAndProductId(Integer userId, Integer productId);
 
     boolean cancelFavorite(Integer userId, Integer productId);
+
+    List<ProductFavoriteCountDTO> getAllProductFavoriteCounts();
 }

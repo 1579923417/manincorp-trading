@@ -3,12 +3,15 @@ package com.manincorp.trading.serviceImpl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.manincorp.trading.dto.ProductFavoriteCountDTO;
 import com.manincorp.trading.dto.UserFavoritePageDTO;
 import com.manincorp.trading.entity.UserFavorite;
 import com.manincorp.trading.mapper.UserFavoriteMapper;
 import com.manincorp.trading.service.UserFavoriteService;
 import com.manincorp.trading.utils.CurrentTimeUtil;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * author: Jamie
@@ -39,4 +42,8 @@ public class UserFavoriteImpl extends ServiceImpl<UserFavoriteMapper, UserFavori
         return baseMapper.deleteByUserIdAndProductId(userId, productId) > 0;
     }
 
+    @Override
+    public List<ProductFavoriteCountDTO> getAllProductFavoriteCounts() {
+        return baseMapper.selectAllProductFavoriteCounts();
+    }
 }

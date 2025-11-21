@@ -28,6 +28,18 @@
             <if test="userEventLog.targetType != null and userEventLog.targetType != ''">
                 AND user_event_log.target_type = #{userEventLog.targetType}
             </if>
+            <if test="userEventLog.username != null and userEventLog.username != ''">
+                AND user.username LIKE CONCAT('%', #{userEventLog.username}, '%')
+            </if>
+            <if test="userEventLog.articleTitle != null and userEventLog.articleTitle != ''">
+                AND article.title LIKE CONCAT('%', #{userEventLog.articleTitle}, '%')
+            </if>
+            <if test="userEventLog.productName != null and userEventLog.productName != ''">
+                AND product.name LIKE CONCAT('%', #{userEventLog.productName}, '%')
+            </if>
+            <if test="userEventLog.brandName != null and userEventLog.brandName != ''">
+                AND brand.name LIKE CONCAT('%', #{userEventLog.brandName}, '%')
+            </if>
             <if test="userEventLog.startTime != null and userEventLog.startTime != ''">
                 AND user_event_log.created_at &gt;= #{userEventLog.startTime}
             </if>

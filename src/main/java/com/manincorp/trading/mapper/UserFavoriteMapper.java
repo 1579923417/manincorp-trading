@@ -4,10 +4,13 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.manincorp.trading.dto.ProductCategoryPageDTO;
+import com.manincorp.trading.dto.ProductFavoriteCountDTO;
 import com.manincorp.trading.dto.UserFavoritePageDTO;
 import com.manincorp.trading.entity.ProductCategory;
 import com.manincorp.trading.entity.UserFavorite;
 import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * author: Jamie
@@ -21,4 +24,6 @@ public interface UserFavoriteMapper extends BaseMapper<UserFavorite> {
     int existsByUserIdAndProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);
 
     int deleteByUserIdAndProductId(@Param("userId") Integer userId, @Param("productId") Integer productId);
+
+    List<ProductFavoriteCountDTO> selectAllProductFavoriteCounts();
 }

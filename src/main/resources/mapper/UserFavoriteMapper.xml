@@ -37,5 +37,17 @@
         WHERE user_id = #{userId}
           AND product_id = #{productId}
     </delete>
+
+    <select id="selectAllProductFavoriteCounts"
+            resultType="com.manincorp.trading.dto.ProductFavoriteCountDTO">
+        SELECT
+            product.id AS productId,
+            product.name AS productName,
+            COUNT(user_favorite.id) AS favoriteCount
+        FROM product
+            LEFT JOIN user_favorite ON product.id = user_favorite.product_id
+        GROUP BY product.id, product.name
+        ORDER BY favoriteCount DESC
+    </select>
 </mapper>
 
